@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# vc-vault one-shot install
+# primary-vault one-shot install
 # - symlink skill into ~/.claude/skills/
 # - symlink skill into ~/.codex/skills/ (if it exists)
 # - print next steps for vault setup
@@ -7,9 +7,9 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SKILL_SRC="$REPO_ROOT/skills/vc-project-router"
+SKILL_SRC="$REPO_ROOT/skills/deal-router"
 
-echo "=== vc-vault install ==="
+echo "=== primary-vault install ==="
 echo "Source: $SKILL_SRC"
 echo
 
@@ -17,7 +17,7 @@ echo
 CLAUDE_SKILLS_DIR="$HOME/.claude/skills"
 if [ -d "$HOME/.claude" ]; then
   mkdir -p "$CLAUDE_SKILLS_DIR"
-  CLAUDE_TARGET="$CLAUDE_SKILLS_DIR/vc-project-router"
+  CLAUDE_TARGET="$CLAUDE_SKILLS_DIR/deal-router"
   if [ -e "$CLAUDE_TARGET" ] && [ ! -L "$CLAUDE_TARGET" ]; then
     echo "⚠️  $CLAUDE_TARGET 已存在且不是 symlink，跳过（手动检查）"
   else
@@ -32,7 +32,7 @@ fi
 CODEX_SKILLS_DIR="$HOME/.codex/skills"
 if [ -d "$HOME/.codex" ]; then
   mkdir -p "$CODEX_SKILLS_DIR"
-  CODEX_TARGET="$CODEX_SKILLS_DIR/vc-project-router"
+  CODEX_TARGET="$CODEX_SKILLS_DIR/deal-router"
   if [ -e "$CODEX_TARGET" ] && [ ! -L "$CODEX_TARGET" ]; then
     echo "⚠️  $CODEX_TARGET 已存在且不是 symlink，跳过"
   else

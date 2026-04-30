@@ -37,7 +37,7 @@ tags: [portfolio, sector/manufacturing, stage/a, lead, example]
 
 # 智能制造科技
 
-> ⚠️ 这是 vc-vault 仓库的合成数据样例，不是真实公司。
+> ⚠️ 这是 primary-vault 仓库的合成数据样例，不是真实公司。
 
 ## 一句话总结
 

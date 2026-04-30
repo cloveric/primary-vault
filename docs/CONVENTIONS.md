@@ -1,6 +1,6 @@
 # 约定
 
-> 这份文档是 vc-vault 的"宪法"——所有 frontmatter 字段、文件夹规则、命名约定。
+> 这份文档是 primary-vault 的"宪法"——所有 frontmatter 字段、文件夹规则、命名约定。
 > 改动 = 可能让 skill 失效，谨慎。
 
 ## 文件夹
@@ -53,9 +53,9 @@
 | `公司` | string | ✓ | 公司名 |
 | `行业` | string | ✓ | 大类（如：高端制造）|
 | `赛道` | string |   | 细分（如：工业机器人）|
-| `我方轮次` | string | ✓ | 我们投的那一轮（A / B / 种子...）|
+| `我方轮次` | string | ✓ | 我们投的那一轮（A / B / 种子 / buyout / growth）|
 | `我方角色` | enum | ✓ | 领投 / 跟投 / observer / SAFE |
-| `状态` | enum | ✓ | active / struggling / exited-ipo / exited-ma / 写零 |
+| `状态` | enum | ✓ | active / struggling / 融资中 / exited-ipo / exited-ma / 写零 |
 | `首次投资日期` | date | ✓ | YYYY-MM-DD |
 | `我方累计投资` | number | ✓ | 单位：万人民币 |
 | `我方累计占股` | number |   | 百分比 |
@@ -69,6 +69,10 @@
 | `首席创始人` | wikilink | ✓ | 链 `3-people/` 下的笔记 |
 | `团队规模` | number |   |  |
 | `我的董事会角色` | enum |   | 董事 / observer / 无 |
+| `最近董事会` | date |   |  |
+| `下次董事会` | date |   |  |
+| `董事会频率` | enum |   | 月 / 季 / 半年 |
+| `当前融资轮` | enum |   | 无 / 已启动 / 投资人尽调中 / TS 谈判 / 已签 / 上市辅导中 / M&A 谈判中 |
 | `论点` | wikilink |   | 链关联的论点笔记 |
 | `project_root` | path | ✓ | **绝对路径**——工作文件目录根 |
 | `files` | object |   | key→相对路径，相对于 `project_root` |
@@ -131,6 +135,52 @@
 |---|---|---|
 | `period` | ✓ | YYYY-W## / YYYY-MM / YYYY-Q? / YYYY |
 | `date` | ✓ |  |
+
+### `type: board-meeting` （在 `6-board-notes/`）
+
+| 字段 | 必填 | 说明 |
+|---|---|---|
+| `公司` | ✓ | 链 portfolio 笔记 |
+| `date` | ✓ |  |
+| `phase` | ✓ | 准备 / 实开 / 已总结 |
+| `我的角色` |   | 董事 / observer / 旁听 |
+| `出席` |   | 链 list（人物笔记） |
+| `prep_doc` |   | 准备文档相对路径 |
+| `next_meeting` |   |  |
+
+### `type: board-prep` （也在 `6-board-notes/`）
+
+| 字段 | 必填 | 说明 |
+|---|---|---|
+| `公司` | ✓ |  |
+| `date` | ✓ | 计划开会日期 |
+| `我的角色` |   |  |
+
+### `type: exit` （在 `2-exited/`）
+
+| 字段 | 必填 | 说明 |
+|---|---|---|
+| `公司` | ✓ |  |
+| `退出类型` | ✓ | ipo / ma / secondary / 写零 / 部分退出 |
+| `退出日期` | ✓ |  |
+| `我方累计投资` | ✓ | 单位：万 |
+| `我方退出 proceeds` | ✓ | 单位：万 |
+| `最终 MOIC` |   | proceeds / 投资 |
+| `持有月数` |   |  |
+| `IRR` |   | 年化（如算过）|
+| `退出方/买家` |   | 链 |
+| `关键条款` |   | list |
+| `退出复盘` |   | 复盘笔记相对路径 |
+
+### `type: exit-retrospective` （在 `2-exited/`）
+
+| 字段 | 必填 | 说明 |
+|---|---|---|
+| `公司` | ✓ |  |
+| `退出记录` | ✓ | 链对应 exit 笔记 |
+| `原 memo` | ✓ | 链 memo |
+| `date` | ✓ | 复盘日期 |
+| `作者` |   |  |
 
 ## tags 命名
 

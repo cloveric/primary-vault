@@ -1,38 +1,51 @@
-# vc-vault
+# primary-vault
 
-> **一级市场投资项目管理 OS · Obsidian + Claude Code + Codex**
+> **一级市场投资项目管理 OS · 全生命周期：pipeline → memo → 投后 → 退出**
 >
-> A VC operating system: portfolio + pipeline + memos + decision logs in your Obsidian vault, driven by Claude Code / Codex CLI through the **vault-as-router** pattern.
+> A private-market operating system covering the **full deal lifecycle**: pipeline → memo → invest → board management → portfolio updates → exit → retrospective. Driven by Claude Code / Codex CLI through the **vault-as-router** pattern on your Obsidian vault.
+>
+> 适用 · Applies to: **VC · PE · CVC · 家族办公室 · search fund · angel · accelerator** —— 任何一级市场结构化股权投资
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Obsidian](https://img.shields.io/badge/Obsidian-Bases-7c3aed)](https://obsidian.md)
-[![Skill compatible](https://img.shields.io/badge/skill-Claude%20Code%20%2B%20Codex-blueviolet)](skills/vc-project-router/SKILL.md)
-[![Status](https://img.shields.io/badge/status-v0.1.0--MVP-orange)](CHANGELOG.md)
+[![Skill compatible](https://img.shields.io/badge/skill-Claude%20Code%20%2B%20Codex-blueviolet)](skills/deal-router/SKILL.md)
+[![Status](https://img.shields.io/badge/status-v0.2.0-brightgreen)](CHANGELOG.md)
 
 ---
 
 ## 🌟 这是什么 · What is this?
 
-一套给 **一级市场投资人**（VC / 天使 / 家族办公室 / FA / GP / 创业孵化器）用的 **项目管理操作系统**。
+一套给 **一级市场投资人**（VC / PE / CVC / 家族办公室 / 天使 / search fund / 创业孵化器）用的 **全生命周期项目管理操作系统**。
 
-A project-management operating system for **primary-market investors** (venture capital, angel, family office, search funds, GPs, accelerators).
+A full-lifecycle project-management operating system for **primary-market investors** (VC, PE, CVC, family office, angel, search funds, accelerators).
 
 **核心特点 · Key features:**
 
-- 📂 用 Obsidian vault 当**中央索引**（不是仓库）—— vault 存元数据 + 决策思考，原始文件（Excel / PDF / DD 资料）留在你工作目录里
-  Use Obsidian as the **central index** (not a file repo). Vault stores metadata + thinking; raw files (spreadsheets, decks, DD docs) stay in your work directory.
+- 📂 **Vault-as-router**——Obsidian vault 当中央索引（不是仓库），vault 存元数据 + 决策思考，原始文件（Excel / PDF / DD 资料）留在你工作目录里
+  Obsidian as **central index** (not file repo). Vault stores metadata + thinking; raw files stay in your work directory.
 
-- 🤖 用 Claude Code / Codex 当**智能调度员** —— 你说一句话，agent 通过 vault 笔记的 frontmatter 自动路由到真实文件干活
-  Claude Code / Codex acts as the **intelligent dispatcher**. Tell it what you want; it routes to the right file via the note's frontmatter map.
+- 🤖 **Claude Code / Codex 当智能调度员**——你说一句话，agent 通过 frontmatter 自动路由到真实文件干活
+  AI as **intelligent dispatcher**. Say what you want; agent routes via frontmatter map.
 
-- 📝 **Memo + 决策日志双重记录** —— 投前 thesis 落字成文，每次重大决策强制留 5 分钟思考记录，12-24 个月后自动回访检查 self-deception
-  **Memos + decision logs as paired records.** Investment theses get written down before commitment; major decisions get 5-minute reflections that you must revisit at 6 / 12 months.
+- 🎯 **全生命周期 14 个核心动作 · Full deal lifecycle (14 core actions):**
+  - **投前**：pipeline 录入 / 阶段流转 / memo 起草（13 节强制结构）
+  - **投中**：投决记录 / 条款追踪 / 决策日志
+  - **投后**：update 解析 / 董事会准备 / 董事会捕获 / 投后支持追踪 / follow-on 决策
+  - **退出**：IPO / M&A / 二级 / 写零 全场景 + 退出复盘 + lesson 回写 thesis
+  
+  Pipeline / memo / invest / **board mgmt / updates / exit / retro** — covered end-to-end.
 
-- 📊 **Bases 视图自动复盘** —— runway 警报 / 沉默超过 90 天 / follow-on 候选 / pipeline 漏斗，全部 frontmatter-driven
-  **Bases-driven reviews:** runway alerts, silent-90-days, follow-on candidates, pipeline funnel — all driven by frontmatter.
+- 📝 **Memo + 决策日志 + 退出复盘三重记录**——投前 thesis 落字、每次重大决策 5 分钟反省、退出后强制回头校准 thesis
+  **Triple-record discipline**: pre-investment thesis, decision logs at every major call, mandatory exit retrospective that updates your fund thesis.
 
-- 🔓 **完全自主可控** —— plaintext markdown，没有 SaaS 锁定，不依赖任何托管服务
-  **Fully self-owned:** plaintext markdown, no SaaS lock-in, no hosted dependency.
+- 🏛️ **董事会准备 / 捕获自动化**——开会前自动收集议程 / KPI 变化 / 上次开放项 / 我要问的硬问题；开完一句话变结构化 board note
+  **Automated board prep + capture**: agenda + KPI deltas + open items + your hard questions before; structured action items + decisions captured after.
+
+- 📊 **Bases 视图自动复盘**——runway 警报 / 沉默 90 天 / 董事会 due / follow-on 候选 / pipeline 漏斗 / 退出追踪，全部 frontmatter-driven
+  **Bases-driven reviews:** all key alerts driven by frontmatter, zero plugins.
+
+- 🔓 **完全自主可控**——plaintext markdown，没有 SaaS 锁定，不依赖任何托管服务
+  **Fully self-owned:** plaintext markdown, no SaaS lock-in.
 
 ---
 
@@ -43,7 +56,8 @@ A project-management operating system for **primary-market investors** (venture 
 - 已经在用 **Obsidian** 做笔记的投资人 / 投资经理 / 分析师
 - 已经习惯用 **Claude Code 或 Codex CLI** 处理工作的 power user
 - 不想被 **Notion / Affinity / DealCloud / SaaS** 锁住数据的独立投资人
-- 一年看 50+ 个项目、投 5-15 个、需要**纪律性思考记录**而不是花式 dashboard 的人
+- VC / PE / CVC / 家办 / search fund / 天使，**任何阶段、任何规模**的私募投资人
+- 一年看 50+ 项目、投 5-15 个、需要**纪律性思考记录**而不是花式 dashboard 的人
 - 喜欢 **plaintext + 命令行 + AI 原生**工作流的人
 
 ❌ **不适合**：
@@ -123,7 +137,7 @@ vault 该装什么 vs 不该装什么 · What goes in / what doesn't:
                       │
 ┌─────────────────────▼───────────────────────────┐
 │   Layer 3: Operator · 操作层                    │
-│   Claude Code / Codex + vc-project-router skill │
+│   Claude Code / Codex + deal-router skill │
 │   • reads vault → resolves paths → does work    │
 │   • writes back log + frontmatter updates       │
 └─────────────────────────────────────────────────┘
@@ -147,7 +161,7 @@ Below are real "you say something → Claude does X" conversations showing how t
 
 > "智能制造科技刚发来 4 月 update PDF，在 ~/work/portfolio/智能制造科技/updates/2026-04.pdf。帮我整理一下。"
 
-**Claude**（自动按 vc-project-router 流程）:
+**Claude**（自动按 deal-router 流程）:
 
 1. Read `vault/1-portfolio/companies/智能制造科技.md`
 2. 拿到 `project_root: ~/work/portfolio/智能制造科技`
@@ -168,7 +182,7 @@ Below are real "you say something → Claude does X" conversations showing how t
 
 **Claude**:
 
-1. 创建 `vault/4-memos/AI芯片公司-A轮-memo.md`，套 vc-vault 的 13 节模板
+1. 创建 `vault/4-memos/AI芯片公司-A轮-memo.md`，套 primary-vault 的 13 节模板
 2. 把你说的内容填进对应位置（团队、估值、推荐金额）
 3. 留**待补字段**（Why Now / Risks Top 5 / 退出路径 / **第 13 节 12-24 月里程碑预测**）让你接着写
 4. 在`0-pipeline/3-DD中/AI芯片公司.md` 创建 pipeline 条目，关联 memo
@@ -213,12 +227,67 @@ Below are real "you say something → Claude does X" conversations showing how t
 
 **结果**：3 小时的复盘动作变成结构化产出 + 每家公司笔记同时更新。
 
+### 工作流 5：投后董事会准备 · Board meeting prep（v0.2 新增）
+
+**你**（开会前 2 天）:
+
+> "下周三智能制造科技董事会，帮我准备。"
+
+**Claude**:
+
+1. 读 `1-portfolio/companies/智能制造科技.md` 当前状态
+2. 找到上次 board note `6-board-notes/智能制造科技-2026-01-15-board.md`，提取**未完成 action items**
+3. 拉最近 2 个季度 update（5-updates/）
+4. 对比当前 KPI vs **memo 第 13 节"12-24 月预测"**
+5. 生成 `6-board-notes/智能制造科技-2026-04-10-board-prep.md`：
+   - **议程建议**（5 个标准 section + 公司特异议题）
+   - **上次开放项 follow-up 表格**（done / open / 推迟）
+   - **关键 KPI 变化表格**（memo 预测 vs 实际）
+   - **我要问的 5 个硬问题**（基于异常和 memo 偏差）
+   - **我要 push 的 add value 事项**
+   - **我之前 promise 的自查清单**
+6. 提示你：⚠️ 团队规模季度增 30% 但收入只增 12%，建议追问"招了什么人 / 提前预算开支了吗"
+
+**结果**：开会前 30 分钟"我要说什么"焦虑 → Claude 给你完整 brief，你只需读一遍 + 改几处。
+
+### 工作流 6：项目退出 · Exit recording（v0.2 新增）
+
+**你**:
+
+> "智能制造科技被某上市公司收购了，2.4 亿，现金 70% 股票 30%，6 个月 lockup。"
+
+**Claude**:
+
+1. **询问缺失细节**：买家名字？我方 proceeds？escrow？earnout？
+2. 你补完
+3. **移动文件**：`mv 1-portfolio/companies/智能制造科技.md 2-exited/`
+4. **更新 portfolio frontmatter**：
+   - `状态: exited-ma`
+   - 加 `退出日期`、`退出 proceeds`、`最终 MOIC`、`持有月数`
+5. **创建退出记录** `2-exited/智能制造科技-exit-record.md`：完整 frontmatter + 时间线 + 我方回报 + LP 影响
+6. **Mark memo** `状态: 已退出-ma`
+7. **触发提醒**：建议你 1 周内做退出复盘（Action 12）
+8. 在本月月报追加退出 log
+
+**第二步——你接受退出复盘**:
+
+> "做智能制造科技退出复盘"
+
+**Claude**:
+
+1. 读 memo（特别第 13 节预测）+ 所有 updates + 所有 board notes + decision logs
+2. 问你 5 个反省问题（thesis 校准 / 里程碑预测 / 关键决策 / 回报对比 / 下次会改什么）
+3. 写到 `7-reviews/智能制造科技-exit-retrospective.md`
+4. **关键**：把 lessons 提炼回 `_thesis.md` 的"已投回头看"或"反 thesis"段——下次类似 deal 自动避坑
+
+**结果**：每一笔退出都强制变成基金学习曲线的一格台阶，不是发完信就忘。
+
 ---
 
 ## 📦 仓库内容 · Repository layout
 
 ```
-vc-vault/
+primary-vault/
 │
 ├── README.md                      ← 你正在读的这份
 ├── LICENSE                        ← MIT
@@ -249,7 +318,7 @@ vc-vault/
 │   └── bases/                     ← Bases 视图文件（v0.2 补全）
 │
 ├── skills/
-│   └── vc-project-router/
+│   └── deal-router/
 │       └── SKILL.md               ← 核心 skill（教 Claude/Codex 这套约定）
 │
 ├── examples/                      ← 合成数据样例（克隆即可看完整一遍）
@@ -267,8 +336,8 @@ vc-vault/
 ### 1. Clone 仓库 · Clone the repo
 
 ```bash
-git clone https://github.com/cloveric/vc-vault.git ~/projects/vc-vault
-cd ~/projects/vc-vault
+git clone https://github.com/cloveric/primary-vault.git ~/projects/primary-vault
+cd ~/projects/primary-vault
 ```
 
 ### 2. 装 Skill · Install the skill
@@ -278,8 +347,8 @@ bash scripts/install.sh
 ```
 
 会做两件事：
-1. Symlink `skills/vc-project-router/` → `~/.claude/skills/vc-project-router`
-2. 同样 symlink → `~/.codex/skills/vc-project-router`（如果你装了 Codex）
+1. Symlink `skills/deal-router/` → `~/.claude/skills/deal-router`
+2. 同样 symlink → `~/.codex/skills/deal-router`（如果你装了 Codex）
 
 > **更新只 git pull 一次，三处通过 symlink 同时生效。**
 > Update once via `git pull`; three locations stay in sync via symlinks.
@@ -291,7 +360,7 @@ bash scripts/install.sh
 **姿势 A**：`vault-template/` 当独立 vault
 
 ```bash
-# 在 Obsidian 里 → Open vault → 选 ~/projects/vc-vault/vault-template/
+# 在 Obsidian 里 → Open vault → 选 ~/projects/primary-vault/vault-template/
 ```
 
 适合：一级投资单独搞一个 vault，跟个人笔记 / 工作笔记分离。
@@ -299,7 +368,7 @@ bash scripts/install.sh
 **姿势 B**：合并进现有 vault
 
 ```bash
-cp -r ~/projects/vc-vault/vault-template/. /path/to/your/existing-vault/
+cp -r ~/projects/primary-vault/vault-template/. /path/to/your/existing-vault/
 ```
 
 适合：你已经有 Obsidian vault 想接入。注意检查同名冲突。
@@ -318,7 +387,7 @@ vault 是索引，原始文件留这里。每家公司一个子文件夹（如 `
 cd /path/to/your/vault
 claude
 # 在 claude prompt 里问：
-# > "按 vc-project-router 约定，列出我所有 portfolio 公司"
+# > "按 deal-router 约定，列出我所有 portfolio 公司"
 # 应该能看到它 glob 1-portfolio/companies/ 给你列表
 ```
 
@@ -328,12 +397,16 @@ claude
 
 | 频率 · Frequency | 你做什么 · You do | Claude 怎么帮 · Claude helps |
 |---|---|---|
-| 🔄 **每次 deal** | 写 memo（强制） | 你口述 30 分钟 → 套 13 节模板生成结构化草稿 |
-| 📅 **每天** | pipeline 进展 | 加 deal、移阶段、链人物笔记 |
-| 📊 **每周一** | runway 警报 + sentiment check | Bases 视图扫一遍，给红/黄/绿区 |
-| 📨 **每月** | portfolio update review | 创始人发来的 PDF/邮件 → 解析成结构化 update + 更新 frontmatter |
+| 🔄 **每次 deal** | 写 memo（强制） | 口述 30 分钟 → 套 13 节模板生成草稿 |
+| 📅 **每天** | pipeline 进展 / 见人 | 加 deal、移阶段、链人物笔记、记互动 |
+| 📊 **每周一** | runway 警报 + 沉默检查 | Bases 视图扫一遍，给红/黄/绿区 |
+| 🏛️ **每次董事会前** | 准备 brief | 自动整合上次 action / KPI 变化 / 我要问的硬问题 |
+| 🏛️ **每次董事会后** | 捕获决议 + 行动项 | 一句话 → 结构化 board note + 更新 frontmatter |
+| 📨 **每月** | portfolio update review | 解析创始人 PDF/邮件 → 结构化 update + 更新 runway / burn |
+| 💰 **follow-on 决策时** | 决策日志 | 强制 5 分钟反省 + 设 6/12 月回访点 |
 | 🔍 **每季度** | full portfolio 复盘 + 估值更新 | 一家家走过 → 自动生成 fund report 草稿 |
-| 📑 **每年** | fund review + LP letter | 算 IRR / TVPI / DPI → LP 信草稿 |
+| 🚪 **退出时** | 录退出条款 + 1 周内复盘 | 移动文件 + 触发复盘提醒 + lessons 回写 thesis |
+| 📑 **每年** | fund review + LP letter | 算 IRR / TVPI / DPI / DPI → LP 信草稿 |
 
 详细 playbook 见 [docs/CADENCE.md](docs/CADENCE.md)（v0.2 补全中）。
 
@@ -347,7 +420,7 @@ claude
 | **Notion** | 好看、协作、模板多 | 数据被锁、agent 接入难、本地不可控 | 5-50 人团队、重协作 |
 | **Affinity** | 专业 VC CRM、关系图谱 | 贵（$2000+/年）、定制差、AI 弱 | 100M+ AUM 机构 |
 | **DealCloud** | 企业级、合规完整 | 巨贵、配置复杂、agent 集成几乎没有 | 10亿+ AUM 大基金 |
-| **vc-vault** | plaintext + AI 原生 + 完全可控 + 0 月费 | 需要自己搭、有学习曲线 | 独立投资人 / 小团队 / power user |
+| **primary-vault** | plaintext + AI 原生 + 完全可控 + 0 月费 | 需要自己搭、有学习曲线 | 独立投资人 / 小团队 / power user |
 
 ---
 
@@ -357,7 +430,7 @@ claude
 
 **A**: vault 模板 + Bases 视图 + memo 模板**单独都有用**——你光用 Obsidian 也能受益。但 60% 的价值来自 skill 自动化（自动解析 update、自动写日志、自动复盘）——光手动操作很快会因为"懒得记录"而中途放弃。
 
-### Q2: 我可以把 vc-vault 当 SaaS 用吗？
+### Q2: 我可以把 primary-vault 当 SaaS 用吗？
 
 **A**: 不能。这是本地工具。**这是优点**——你的投资数据 100% 在你电脑里，不上任何云（除非你自己用 iCloud / Dropbox 做 vault 同步）。
 
@@ -367,7 +440,7 @@ claude
 
 ### Q4: 跟 kepano/obsidian-skills 有什么关系？
 
-**A**: 兼容。`kepano/obsidian-skills` 教 Claude 写 Obsidian 方言（wikilinks / properties / Bases / Canvas），是**通用 Obsidian skill**。`vc-vault/skills/vc-project-router/` 是**领域 skill**（VC 工作流约定）。两个一起装最强 —— Claude 既懂 Obsidian 怎么写，又懂 VC 怎么管。
+**A**: 兼容。`kepano/obsidian-skills` 教 Claude 写 Obsidian 方言（wikilinks / properties / Bases / Canvas），是**通用 Obsidian skill**。`primary-vault/skills/deal-router/` 是**领域 skill**（VC 工作流约定）。两个一起装最强 —— Claude 既懂 Obsidian 怎么写，又懂 VC 怎么管。
 
 ### Q5: 我已经投了 50 家公司，怎么 onboard？
 
@@ -392,35 +465,46 @@ claude
 
 ## 🗺️ Roadmap
 
-### v0.1.0 · Initial MVP（**当前**）
+### v0.1.0 · Initial MVP
 
 - [x] vault-template 骨架 + 8 份模板
-- [x] vc-project-router skill（7 个核心动作）
+- [x] deal-router skill（7 个核心动作）
 - [x] 1 个完整 portfolio 公司样例 + 完整 13 节 memo 样例
 - [x] docs: README / INSTALL / ARCHITECTURE / CONVENTIONS
 - [x] scripts/install.sh 一键装
 
-### v0.2.0 · Polished（计划）
+### v0.2.0 · Full lifecycle（**当前**）
 
-- [ ] **Bases 视图文件**（5 个 .base：runway 警报 / 沉默90天 / follow-on 候选 / pipeline 漏斗 / 复盘 due）
-- [ ] docs/CADENCE.md（日 / 周 / 月 / 季 / 年 详细 playbook）
-- [ ] docs/DIALOGUES.md（30+ 个"你说什么 → Claude 怎么做"实例集）
-- [ ] 5+ 家 portfolio 样例（覆盖 active / struggling / exited / 写零）
+- [x] **重命名 vc-vault → primary-vault**（覆盖 VC + PE + CVC + 家办）
+- [x] **重命名 skill `vc-project-router` → `deal-router`**
+- [x] **新增投后管理动作**（Action 7-10）：董事会准备 / 董事会捕获 / portfolio support / follow-on 决策
+- [x] **新增退出动作**（Action 11-13）：退出录入（IPO / M&A / 二级 / 写零）/ 退出复盘 / 退出 pipeline 追踪
+- [x] **新增模板**：board meeting / board prep / exit / exit retrospective
+- [x] **frontmatter 扩展**：最近董事会 / 下次董事会 / 当前融资轮 / 退出条款
+- [x] **CONVENTIONS 加 4 种新 type**：board-meeting / board-prep / exit / exit-retrospective
+- [x] README 加 6 个 workflow 示例（v0.1 4 个 + v0.2 新增板块 + 退出）
+
+### v0.3.0 · Polished（计划）
+
+- [ ] **Bases 视图文件**（7 个 .base：runway 警报 / 沉默90天 / 董事会due / follow-on 候选 / pipeline 漏斗 / 复盘 due / 退出追踪）
+- [ ] docs/CADENCE.md（详细 playbook）
+- [ ] docs/DIALOGUES.md（30+ 个 "你说什么 → Claude 怎么做" 实例）
+- [ ] 5+ 家 portfolio 样例（覆盖 active / struggling / exited-ipo / exited-ma / 写零）
 - [ ] scripts/new-deal.sh 脚手架
-- [ ] 更详细的 thesis 模板（含 anti-thesis）
+- [ ] 更详细的 thesis 模板（含 anti-thesis 和 lessons-by-deal 板块）
 
-### v0.3.0 · Advanced
+### v0.4.0 · Advanced
 
-- [ ] 投后管理 skill（董事会准备 / 季度 update 解析升级）
-- [ ] LP report 自动生成 skill
-- [ ] 财务模型校验 skill（读 Excel 验证创始人发的数）
+- [ ] LP report 自动生成 skill（季度 / 年度）
+- [ ] 财务模型校验 skill（读 Excel 验证创始人 update 里的数）
 - [ ] 多 vault / 多基金支持
+- [ ] 移动端工作流（Telegram → vault inbox）
 
 ### v1.0.0 · Production-grade
 
 - [ ] 真实使用 12 个月的 case study
-- [ ] 移动端工作流（Telegram → vault inbox）
-- [ ] 跟 Affinity / Notion 的迁移工具
+- [ ] 跟 Affinity / Notion / DealCloud 的迁移工具
+- [ ] 团队协作模式（git 共享 vault）
 
 ---
 

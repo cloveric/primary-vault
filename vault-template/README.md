@@ -1,6 +1,6 @@
 # vault-template
 
-这是 vc-vault 的 Obsidian 骨架。两种用法：
+这是 primary-vault 的 Obsidian 骨架。两种用法：
 
 ## 用法 A：拷进你现有的 vault
 

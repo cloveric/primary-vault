@@ -13,7 +13,7 @@ tags: [memo, stage/a, sector/manufacturing, example]
 
 # 智能制造科技 · A 轮 · 投资备忘录
 
-> ⚠️ vc-vault 仓库合成样例。展示完整 13 节结构怎么写。
+> ⚠️ primary-vault 仓库合成样例。展示完整 13 节结构怎么写。
 
 ## 1. 一句话总结
 
