@@ -1,0 +1,38 @@
+# Pipeline 漏斗：所有 pipeline 项目按当前阶段分组
+
+filters:
+  and:
+    - file.inFolder("0-pipeline")
+    - 'note.type == "pipeline-deal"'
+
+properties:
+  note.公司:
+    displayName: 公司
+  note.当前阶段:
+    displayName: 阶段
+  note.首次接触:
+    displayName: 首次接触
+  note.推荐金额:
+    displayName: 推荐金额 (万)
+  note.推荐估值:
+    displayName: 推荐估值 (万)
+  note.负责合伙人:
+    displayName: 负责
+  note.机会打分:
+    displayName: 机会
+  note.风险打分:
+    displayName: 风险
+
+views:
+  - type: table
+    name: 📥 Pipeline 漏斗
+    limit: 100
+    groupBy:
+      property: note.当前阶段
+      direction: ASC
+    order:
+      - note.机会打分
+      - note.公司
+      - note.首次接触
+      - note.推荐金额
+      - note.负责合伙人

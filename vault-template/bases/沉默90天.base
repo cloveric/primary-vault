@@ -1,0 +1,36 @@
+# 沉默超过 90 天：portfolio 公司最近 update 距今超过 90 天
+# 提醒你主动 ping 创始人
+
+filters:
+  and:
+    - file.inFolder("1-portfolio/companies")
+    - 'note.type == "portfolio-company"'
+    - 'note.状态 == "active"'
+
+formulas:
+  沉默天数: '(today() - note["最近 update"]) / 86400000'
+  状态: 'if(formula.沉默天数 > 120, "🔴 太久", if(formula.沉默天数 > 90, "🟡 该 ping", "✅ 正常"))'
+
+properties:
+  formula.状态:
+    displayName: 状态
+  note.公司:
+    displayName: 公司
+  formula.沉默天数:
+    displayName: 沉默天数
+  note["最近 update"]:
+    displayName: 最近 update
+  note.首席创始人:
+    displayName: 创始人
+
+views:
+  - type: table
+    name: 😴 沉默超过 90 天
+    limit: 30
+    filters:
+      'formula.沉默天数 > 90'
+    order:
+      - formula.沉默天数
+      - note.公司
+      - note["最近 update"]
+      - note.首席创始人

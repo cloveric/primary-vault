@@ -1,0 +1,41 @@
+# Runway 警报视图：runway 紧的 portfolio 公司
+#
+# 字段说明：因为我们 frontmatter 用了带空格的中文字段名（如 "runway 月数"），
+# 引用时用 bracket 语法 note["runway 月数"]。
+# 如果你 Obsidian 版本不识别这种引用，把 frontmatter 里改成 runway_months 这类无空格字段。
+
+filters:
+  and:
+    - file.inFolder("1-portfolio/companies")
+    - 'note.type == "portfolio-company"'
+    - 'note.状态 == "active"'
+    - 'note["runway 月数"] < 9'
+
+formulas:
+  紧迫等级: 'if(note["runway 月数"] < 6, "🔴 红", if(note["runway 月数"] < 9, "🟡 黄", "🟢 绿"))'
+
+properties:
+  formula.紧迫等级:
+    displayName: 等级
+  note.公司:
+    displayName: 公司
+  note["runway 月数"]:
+    displayName: Runway (月)
+  note.月烧钱:
+    displayName: 月烧 (万)
+  note["最近 update"]:
+    displayName: 最近 update
+
+views:
+  - type: table
+    name: 🚨 Runway 警报
+    limit: 50
+    order:
+      - formula.紧迫等级
+      - note["runway 月数"]
+      - note.公司
+      - note.月烧钱
+      - note["最近 update"]
+    filters:
+      and:
+        - 'note["runway 月数"] < 9'

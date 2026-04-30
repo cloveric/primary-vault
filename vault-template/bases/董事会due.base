@@ -1,0 +1,37 @@
+# 董事会 Due：未来 14 天内有董事会的 portfolio 公司
+
+filters:
+  and:
+    - file.inFolder("1-portfolio/companies")
+    - 'note.type == "portfolio-company"'
+    - 'note.状态 == "active"'
+
+formulas:
+  距开会天数: '(note.下次董事会 - today()) / 86400000'
+  紧迫: 'if(formula.距开会天数 < 3, "🔥 急", if(formula.距开会天数 < 7, "⏰ 准备", "📅 预备"))'
+
+properties:
+  formula.紧迫:
+    displayName: 紧迫
+  note.公司:
+    displayName: 公司
+  note.下次董事会:
+    displayName: 开会日期
+  formula.距开会天数:
+    displayName: 距今天数
+  note.我的董事会角色:
+    displayName: 我角色
+
+views:
+  - type: table
+    name: 🏛️ 董事会 due
+    limit: 30
+    filters:
+      and:
+        - 'formula.距开会天数 >= 0'
+        - 'formula.距开会天数 <= 14'
+    order:
+      - formula.距开会天数
+      - note.公司
+      - note.下次董事会
+      - note.我的董事会角色

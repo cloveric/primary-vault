@@ -9,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Obsidian](https://img.shields.io/badge/Obsidian-Bases-7c3aed)](https://obsidian.md)
 [![Skill compatible](https://img.shields.io/badge/skill-Claude%20Code%20%2B%20Codex-blueviolet)](skills/deal-router/SKILL.md)
-[![Status](https://img.shields.io/badge/status-v0.2.0-brightgreen)](CHANGELOG.md)
+[![Status](https://img.shields.io/badge/status-v0.3.0-brightgreen)](CHANGELOG.md)
 
 ---
 
@@ -473,7 +473,7 @@ claude
 - [x] docs: README / INSTALL / ARCHITECTURE / CONVENTIONS
 - [x] scripts/install.sh 一键装
 
-### v0.2.0 · Full lifecycle（**当前**）
+### v0.2.0 · Full lifecycle
 
 - [x] **重命名 vc-vault → primary-vault**（覆盖 VC + PE + CVC + 家办）
 - [x] **重命名 skill `vc-project-router` → `deal-router`**
@@ -484,14 +484,14 @@ claude
 - [x] **CONVENTIONS 加 4 种新 type**：board-meeting / board-prep / exit / exit-retrospective
 - [x] README 加 6 个 workflow 示例（v0.1 4 个 + v0.2 新增板块 + 退出）
 
-### v0.3.0 · Polished（计划）
+### v0.3.0 · Polished（**当前**）
 
-- [ ] **Bases 视图文件**（7 个 .base：runway 警报 / 沉默90天 / 董事会due / follow-on 候选 / pipeline 漏斗 / 复盘 due / 退出追踪）
-- [ ] docs/CADENCE.md（详细 playbook）
-- [ ] docs/DIALOGUES.md（30+ 个 "你说什么 → Claude 怎么做" 实例）
-- [ ] 5+ 家 portfolio 样例（覆盖 active / struggling / exited-ipo / exited-ma / 写零）
-- [ ] scripts/new-deal.sh 脚手架
-- [ ] 更详细的 thesis 模板（含 anti-thesis 和 lessons-by-deal 板块）
+- [x] **Bases 视图文件**（7 个 .base：runway 警报 / 沉默90天 / 董事会due / follow-on 候选 / pipeline 漏斗 / 复盘 due / 退出追踪）+ bases/README.md
+- [x] **docs/CADENCE.md**（完整操作节奏 playbook：日 / 周 / 月 / 季 / 年 + 异常时刻 + 习惯保活）
+- [x] **docs/DIALOGUES.md**（36 个真实场景对话，9 大分类）
+- [x] **5 家 portfolio 样例**（active 主角 / active 跟投 / struggling / exited-ipo / 写零，覆盖完整生命周期）
+- [x] **scripts/new-deal.sh** 脚手架
+- [x] **增强 _thesis.md**（v1 8 节 → v2 10 节：anti-thesis 拆细、lessons by deal、退出 outliers 板块）
 
 ### v0.4.0 · Advanced
 
