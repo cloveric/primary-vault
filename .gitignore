@@ -1,0 +1,9 @@
+.DS_Store
+.obsidian/workspace*
+.obsidian/cache
+*.log
+.idea/
+.vscode/
+node_modules/
+__pycache__/
+.venv/
