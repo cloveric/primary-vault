@@ -167,7 +167,7 @@ Below are real "you say something → Claude does X" conversations showing how t
 2. 拿到 `project_root: ~/work/portfolio/智能制造科技`
 3. 打开 `updates/2026-04.pdf`，提取关键数字
 4. 创建 `vault/5-updates/智能制造科技-2026-04-update.md`，带结构化 frontmatter（runway, burn, 团队规模, 风险信号）
-5. **更新** portfolio 笔记 frontmatter：`runway 月数` 14 → 11，`月烧钱` 60 → 80，`团队规模` 22 → 25
+5. **更新** portfolio 笔记 frontmatter：`runway_months` 14 → 11，`monthly_burn` 60 → 80，`team_size` 22 → 25
 6. **追加**到 portfolio 笔记的"## 近期操作"：`- 2026-05-01 14:32 解析 4 月 update，runway 14→11 月`
 7. **追加**到 portfolio 笔记的"## Updates 时间线"：`[[5-updates/智能制造科技-2026-04-update]]`
 8. **警告你**：⚠️ Runway 从 14 降到 11，已进入预警区（< 12 月）。建议本月找一次创始人聊融资节奏。
@@ -202,7 +202,7 @@ Below are real "you say something → Claude does X" conversations showing how t
 2. 计算每家：runway 余量、上次 update 距今天数、最近一次操作
 3. **红区**：runway < 6 月 → "🔴 这 2 家本周必须联系"
 4. **黄区**：runway 6-9 月 / 沉默 60-90 天 → "🟡 这 4 家关注一下"
-5. **复盘 due**：`下次复盘截止 < 今天` 的 → "⏰ 这 3 家该季度复盘了"
+5. **复盘 due**：`next_review_due < 今天` 的 → "⏰ 这 3 家该季度复盘了"
 6. 生成 markdown 表格输出
 7. **追加**到 `7-reviews/2026-W18-周扫描.md`
 
@@ -222,7 +222,7 @@ Below are real "you say something → Claude does X" conversations showing how t
    - 关键变量进展？
    - 仓位决策（保持 / 加仓 / 减仓 / 退出）？
 3. 你回答，Claude 写到每家笔记的"## 复盘 2026-Q2" section
-4. 更新各家的 `下次复盘截止: +90 天`
+4. 更新各家的 `next_review_due: +90 天`
 5. 全部走完后，生成 `vault/7-reviews/2026-Q2-portfolio-review.md` 总览
 
 **结果**：3 小时的复盘动作变成结构化产出 + 每家公司笔记同时更新。
@@ -262,10 +262,10 @@ Below are real "you say something → Claude does X" conversations showing how t
 2. 你补完
 3. **移动文件**：`mv 1-portfolio/companies/智能制造科技.md 2-exited/`
 4. **更新 portfolio frontmatter**：
-   - `状态: exited-ma`
-   - 加 `退出日期`、`退出 proceeds`、`最终 MOIC`、`持有月数`
+   - `status: exited-ma`
+   - 加 `exit_date`、`exit_proceeds`、`final_moic`、`holding_months`
 5. **创建退出记录** `2-exited/智能制造科技-exit-record.md`：完整 frontmatter + 时间线 + 我方回报 + LP 影响
-6. **Mark memo** `状态: 已退出-ma`
+6. **Mark memo** `status: exited-ma`
 7. **触发提醒**：建议你 1 周内做退出复盘（Action 12）
 8. 在本月月报追加退出 log
 
@@ -292,41 +292,65 @@ primary-vault/
 ├── README.md                      ← 你正在读的这份
 ├── LICENSE                        ← MIT
 ├── CHANGELOG.md                   ← 版本历史
+├── .gitattributes                 ← UTF-8 多字节文件名处理
 │
 ├── docs/                          ← 详细文档（**强烈建议读完**）
-│   ├── INSTALL.md                 ← 一步步安装
+│   ├── INSTALL.md                 ← 一步步安装 + git init + 并发警告
 │   ├── ARCHITECTURE.md            ← vault-as-router 模式设计哲学
-│   └── CONVENTIONS.md             ← frontmatter / 文件夹 / 命名约定（"宪法"）
+│   ├── CONVENTIONS.md             ← frontmatter / 文件夹 / 命名约定 + v0.3→v0.4 映射
+│   ├── CADENCE.md                 ← 日 / 周 / 月 / 季 / 年 操作 playbook
+│   └── DIALOGUES.md               ← 36 个真实场景对话样例
 │
 ├── vault-template/                ← Obsidian vault 完整骨架
 │   ├── _dashboard.md              ← 总览面板（嵌 Bases 视图）
-│   ├── _thesis.md                 ← 投资策略宪法模板
+│   ├── _thesis.md                 ← 投资策略宪法 v2 (10 节)
+│   ├── _QUICKSTART.md             ← 第一次打开 vault 看这里
 │   ├── README.md                  ← 这个 vault 怎么用
 │   │
 │   ├── 0-pipeline/                ← 在看的 deal
 │   │   ├── 1-初筛/, 2-meeting/, 3-DD中/, 4-IC/, 5-pass/
 │   │
-│   ├── 1-portfolio/companies/     ← 已投
-│   │   └── _template.md           ← portfolio 公司模板（完整 frontmatter）
-│   │
-│   ├── 2-exited/                  ← IPO / M&A / 写零（保留复盘用）
-│   ├── 3-people/_template.md      ← 创始人 / 共投 / LP 模板
-│   ├── 4-memos/_template.md       ← Memo 模板（13 节结构）
-│   ├── 5-updates/_template.md     ← 季度 update 模板
-│   ├── 6-board-notes/             ← 董事会会议
-│   ├── 7-reviews/_template.md     ← 周/月/季/年复盘模板
-│   └── bases/                     ← Bases 视图文件（v0.2 补全）
+│   ├── 1-portfolio/companies/_template.md
+│   ├── 2-exited/
+│   │   ├── _exit-template.md            ← 退出记录模板
+│   │   └── _exit-retrospective-template.md  ← 退出复盘 7 节模板
+│   ├── 3-people/_template.md
+│   ├── 4-memos/_template.md       ← Memo 14 节模板（含强制第 13 节）
+│   ├── 5-updates/_template.md
+│   ├── 6-board-notes/
+│   │   ├── _board-template.md           ← 董事会捕获
+│   │   └── _board-prep-template.md      ← 董事会准备
+│   ├── 7-reviews/
+│   │   ├── _template.md                 ← 周/月/季/年复盘
+│   │   └── decisions/                   ← 决策日志（follow-on / write-off 等）
+│   └── bases/                     ← 7 个 Bases 视图（开箱即用）
+│       ├── runway-警报.base
+│       ├── 沉默90天.base
+│       ├── 董事会due.base
+│       ├── follow-on-候选.base
+│       ├── pipeline-漏斗.base
+│       ├── 复盘due.base
+│       ├── 退出追踪.base
+│       └── README.md                    ← 视图说明 + 字段兼容指引
 │
 ├── skills/
 │   └── deal-router/
-│       └── SKILL.md               ← 核心 skill（教 Claude/Codex 这套约定）
+│       └── SKILL.md               ← 核心 skill（14 个动作，含投后 + 退出）
 │
 ├── examples/                      ← 合成数据样例（克隆即可看完整一遍）
-│   ├── 智能制造科技-portfolio.md
-│   └── 智能制造科技-A轮-memo.md   ← 完整 13 节 memo + 6 月回访已回填
+│   ├── 智能制造科技-portfolio.md           ← active 主角
+│   ├── 智能制造科技-A轮-memo.md           ← 完整 13 节 memo + 6 月回访已回填
+│   ├── AI芯片公司-portfolio.md            ← active 跟投样例
+│   ├── SaaS公司-portfolio-struggling.md   ← struggling 样例
+│   ├── 光储一体公司-exit-ipo.md           ← IPO 退出样例 (MOIC 7x)
+│   └── 电商Saas-portfolio-写零.md         ← 写零样例 + 提炼 lessons
 │
 └── scripts/
-    └── install.sh                 ← 一键 symlink skill 到 ~/.claude + ~/.codex
+    ├── install.sh                 ← 一键 symlink skill 到 ~/.claude + ~/.codex
+    ├── uninstall.sh               ← 一键拆 symlink
+    ├── new-deal.sh                ← 快速建新 deal 骨架
+    ├── lint-vault.sh              ← 校验 vault 符合 v0.4 约定
+    └── validate-memo.sh           ← 强制 memo 第 13 节非空（可作 git pre-commit hook）
 ```
 
 ---
@@ -391,6 +415,10 @@ claude
 # 应该能看到它 glob 1-portfolio/companies/ 给你列表
 ```
 
+### 6. 第一次打开 vault 看 `_QUICKSTART.md` · First-time vault open
+
+vault-template 里有份 `_QUICKSTART.md` —— 第一次打开 Obsidian 看到一堆空文件夹时，按上面 3 步走最快上手（5+15+5 = 25 分钟）。
+
 ---
 
 ## 🎬 操作节奏 · Operating cadence
@@ -408,7 +436,8 @@ claude
 | 🚪 **退出时** | 录退出条款 + 1 周内复盘 | 移动文件 + 触发复盘提醒 + lessons 回写 thesis |
 | 📑 **每年** | fund review + LP letter | 算 IRR / TVPI / DPI / DPI → LP 信草稿 |
 
-详细 playbook 见 [docs/CADENCE.md](docs/CADENCE.md)（v0.2 补全中）。
+详细 playbook 见 [docs/CADENCE.md](docs/CADENCE.md)。
+36 个真实对话样例见 [docs/DIALOGUES.md](docs/DIALOGUES.md)。
 
 ---
 
@@ -460,6 +489,48 @@ claude
 ### Q8: Claude Code 不会乱改我笔记吧？
 
 **A**: SKILL.md 里写了硬约束："不要默默改用户已有值——改 estim 字段必须 confirm"。但**最稳的姿势**是：vault 也用 git 管理，每天 commit 一次，错了能回滚。
+
+另外 v0.4 起 SKILL.md 加了 **Concurrent-edit safety** 硬性提醒：Claude 改某个笔记前会主动告诉你"先在 Obsidian 关闭这个笔记"，避免你和 Claude 同时改一个文件。
+
+### Q9: v0.3 升 v0.4 怎么迁移？
+
+**A**: v0.4 是**breaking change**——frontmatter 字段名从中文带空格改成 snake_case 英文。如果你 v0.3 已经录了真实 portfolio 笔记：
+
+```bash
+# 1. pull v0.4
+cd ~/projects/primary-vault && git pull
+
+# 2. 自动检测你 vault 里的 v0.3 字段残留
+bash scripts/lint-vault.sh /path/to/your/vault
+
+# 3. 批量 sed 替换（参考 docs/CONVENTIONS.md 末尾的完整映射表）
+find /path/to/vault -name "*.md" -exec sed -i '' 's/^runway 月数:/runway_months:/g' {} \;
+find /path/to/vault -name "*.md" -exec sed -i '' 's/^当前 MOIC:/current_moic:/g' {} \;
+# ... 50+ 个字段都做一遍
+
+# 4. 再跑 lint-vault 确认干净
+bash scripts/lint-vault.sh /path/to/your/vault
+```
+
+如果你 v0.3 笔记不多（< 20 家公司），手工改更稳。
+
+### Q10: 我能强制要求 memo 第 13 节必填吗？
+
+**A**: 能。`scripts/validate-memo.sh` 会检查 memo 文件第 13 节存在且实质内容 ≥ 3 行。把它装成 git pre-commit hook 就强制了：
+
+```bash
+# 在 vault 根目录
+mkdir -p .git/hooks
+cat > .git/hooks/pre-commit <<'EOF'
+#!/bin/bash
+for memo in $(git diff --cached --name-only | grep '4-memos/.*\.md$'); do
+  bash ~/projects/primary-vault/scripts/validate-memo.sh "$memo" || exit 1
+done
+EOF
+chmod +x .git/hooks/pre-commit
+```
+
+之后任何 commit 含 memo 改动都会先校验第 13 节。
 
 ---
 
