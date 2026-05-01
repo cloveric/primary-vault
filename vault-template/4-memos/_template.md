@@ -1,17 +1,17 @@
 ---
 type: memo
 deal: "[[]]"
-轮次:
-推荐: 投              # 投 / 继续观察 / pass
-推荐金额:             # 单位：万
-推荐估值:             # 投前估值，单位：万
+round:
+recommendation:           # invest / watch / pass
+recommended_amount:       # 单位：万
+recommended_valuation:    # 投前，单位：万
 date:
-作者:
-状态: 草稿            # 草稿 / 内部讨论 / 通过IC / 已投 / pass
+author:
+status: draft             # draft / internal-discussion / passed-ic / invested / passed / exited-ipo / exited-ma / written-off
 tags: [memo, stage/]
 ---
 
-# <公司> · <轮次> · 投资备忘录
+# <company> · <round> · 投资备忘录
 
 ## 1. 一句话总结
 
@@ -19,11 +19,7 @@ tags: [memo, stage/]
 
 ## 2. What — 公司是什么
 
-[产品 / 服务 / 业务模式概述]
-
 ## 3. Why Now — 为什么是现在
-
-[技术拐点 / 政策窗口 / 市场转折 / 用户行为变化 — 至少 1 条]
 
 ## 4. Why This Team — 为什么这个团队
 
@@ -38,10 +34,6 @@ tags: [memo, stage/]
 - 我们的取势 vs 全球：
 
 ## 6. 竞争格局
-
-- 现状玩家：
-- 替代方案：
-- 公司的 moat（如有）：
 
 ## 7. 商业模式 / 单位经济
 

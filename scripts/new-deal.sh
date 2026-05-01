@@ -18,10 +18,17 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-COMPANY="$1"
+COMPANY_RAW="$1"
 STAGE="${2:-2-meeting}"
 
-# 找 vault 根 (含 .obsidian 的祖先目录)
+# Sanitize 文件名：去掉文件系统不允许的字符 / : * ? " < > | \
+COMPANY=$(echo "$COMPANY_RAW" | sed 's|[/:*?"<>|\\]|-|g')
+
+if [ "$COMPANY" != "$COMPANY_RAW" ]; then
+  echo "⚠️  公司名含特殊字符，已 sanitize: '$COMPANY_RAW' → '$COMPANY'"
+fi
+
+# 找 vault 根 (含 0-pipeline 的祖先目录)
 VAULT_ROOT=$(pwd)
 while [ "$VAULT_ROOT" != "/" ]; do
   if [ -d "$VAULT_ROOT/.obsidian" ] || [ -d "$VAULT_ROOT/0-pipeline" ]; then
@@ -53,23 +60,33 @@ fi
 TODAY=$(date +%Y-%m-%d)
 NOW=$(date +"%Y-%m-%d %H:%M")
 
+# Stage name → enum value
+case "$STAGE" in
+  1-初筛) STAGE_VAL=screening ;;
+  2-meeting) STAGE_VAL=meeting ;;
+  3-DD中) STAGE_VAL=dd ;;
+  4-IC) STAGE_VAL=ic ;;
+  5-pass) STAGE_VAL=pass ;;
+  *) STAGE_VAL=meeting ;;
+esac
+
 cat > "$DEAL_FILE" <<EOF
 ---
 type: pipeline-deal
-公司: $COMPANY
-来源: "[[]]"
-首次接触: $TODAY
-当前阶段: ${STAGE#*-}
-推荐金额:
-推荐估值:
-预计投决日期:
-负责合伙人: 我
-风险打分:
-机会打分:
+company: $COMPANY
+source: "[[]]"
+first_contact_date: $TODAY
+current_stage: $STAGE_VAL
+recommended_amount:
+recommended_valuation:
+expected_decision_date:
+lead_partner: 我
+risk_score:
+opportunity_score:
 project_root: ~/work/pipeline/$COMPANY
 files:
   pitch:
-  财务:
+  financial_model:
 last_action: $NOW 创建 deal 骨架
 tags: [pipeline, sector/, stage/]
 ---

@@ -22,10 +22,13 @@
 
 ## 🌅 每天 · Daily
 
-### 早上（5-10 分钟）
+### 任意时段（5-10 分钟）—— 不强求晨间
+
+> 现实：大多数人早上先看邮件 / Bloomberg / WhatsApp / Slack。把"打开 vault"硬挤进起床第一件事不现实。
+> 找你**已经稳定的那个 5 分钟**——午饭前、早咖啡、第一通电话之间——固定打开 vault。
 
 **做什么 · What you do:**
-- 打开 vault，扫一眼 `_dashboard.md`
+- 扫一眼 `_dashboard.md`
 - 看今日的 calendar：今天有几个 deal meeting / 几个 portfolio 1-on-1 / 几个 LP 沟通
 - 今日"必处理"：red 区 portfolio（runway < 6 月）有动态吗？
 

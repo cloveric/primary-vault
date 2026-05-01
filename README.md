@@ -9,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Obsidian](https://img.shields.io/badge/Obsidian-Bases-7c3aed)](https://obsidian.md)
 [![Skill compatible](https://img.shields.io/badge/skill-Claude%20Code%20%2B%20Codex-blueviolet)](skills/deal-router/SKILL.md)
-[![Status](https://img.shields.io/badge/status-v0.3.0-brightgreen)](CHANGELOG.md)
+[![Status](https://img.shields.io/badge/status-v0.4.0-brightgreen)](CHANGELOG.md)
 
 ---
 
@@ -484,27 +484,47 @@ claude
 - [x] **CONVENTIONS 加 4 种新 type**：board-meeting / board-prep / exit / exit-retrospective
 - [x] README 加 6 个 workflow 示例（v0.1 4 个 + v0.2 新增板块 + 退出）
 
-### v0.3.0 · Polished（**当前**）
+### v0.3.0 · Polished
 
-- [x] **Bases 视图文件**（7 个 .base：runway 警报 / 沉默90天 / 董事会due / follow-on 候选 / pipeline 漏斗 / 复盘 due / 退出追踪）+ bases/README.md
-- [x] **docs/CADENCE.md**（完整操作节奏 playbook：日 / 周 / 月 / 季 / 年 + 异常时刻 + 习惯保活）
-- [x] **docs/DIALOGUES.md**（36 个真实场景对话，9 大分类）
-- [x] **5 家 portfolio 样例**（active 主角 / active 跟投 / struggling / exited-ipo / 写零，覆盖完整生命周期）
+- [x] **Bases 视图文件**（7 个 .base）
+- [x] **docs/CADENCE.md** 完整 playbook
+- [x] **docs/DIALOGUES.md** 36 个对话
+- [x] **5 家 portfolio 样例**（active 主角 / active 跟投 / struggling / exited-ipo / 写零）
 - [x] **scripts/new-deal.sh** 脚手架
-- [x] **增强 _thesis.md**（v1 8 节 → v2 10 节：anti-thesis 拆细、lessons by deal、退出 outliers 板块）
+- [x] **增强 _thesis.md**（10 节）
 
-### v0.4.0 · Advanced
+### v0.4.0 · Self-audit fix-up + breaking schema refactor（**当前**）
+
+针对 v0.3 自检发现的 17 个 bug / 设计缺陷一次性清完，并把 frontmatter 字段名重构为 snake_case 英文（breaking change）。
+
+- [x] **🚨 Breaking**: frontmatter 字段全部 snake_case 英文（`runway 月数` → `runway_months`），中文显示通过 Bases displayName
+- [x] 修 `_dashboard.md` 假 Bases 语法（用真 `![[bases/...]]` embed）
+- [x] 创建缺失的 `7-reviews/decisions/` 目录
+- [x] 4 个 examples `project_root` 改 placeholder（不再硬编码作者 home 路径）
+- [x] Bases 文件加"已知未验证语法" section（today() / 日期算术等）
+- [x] SKILL.md 加 **Concurrent-edit safety** critical section
+- [x] SKILL.md 改 "use Bases views" wording bug
+- [x] 新增 `scripts/uninstall.sh` / `lint-vault.sh` / `validate-memo.sh`
+- [x] 新增 `vault-template/_QUICKSTART.md`
+- [x] 新增 `.gitattributes`（中文文件名 UTF-8）
+- [x] `new-deal.sh` 加 filename sanitize
+- [x] INSTALL.md 加 vault `git init` 推荐 + 并发警告 + Windows 兼容性说明
+- [x] CADENCE.md "早上" → "任意稳定时段"
+
+### v0.5.0 · Advanced（计划）
 
 - [ ] LP report 自动生成 skill（季度 / 年度）
-- [ ] 财务模型校验 skill（读 Excel 验证创始人 update 里的数）
+- [ ] 财务模型校验 skill（读 Excel 验证 update 数据）
 - [ ] 多 vault / 多基金支持
 - [ ] 移动端工作流（Telegram → vault inbox）
 
 ### v1.0.0 · Production-grade
 
 - [ ] 真实使用 12 个月的 case study
+- [ ] Windows 测试 + 修复
 - [ ] 跟 Affinity / Notion / DealCloud 的迁移工具
 - [ ] 团队协作模式（git 共享 vault）
+
 
 ---
 

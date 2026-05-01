@@ -1,13 +1,13 @@
 ---
 type: update
-公司: "[[]]"
-period: 2026-Q1       # 季度 or YYYY-MM 月度
-update_date:          # 创始人发出的日期
-parsed_date:          # 我整理进 vault 的日期
+company: "[[]]"
+period:                    # YYYY-Q? 或 YYYY-MM
+update_date:               # 创始人发出的日期
+parsed_date:               # 我整理进 vault 的日期
 tags: [update]
 ---
 
-# <公司> · <period> Update
+# <company> · <period> Update
 
 ## 关键数字
 

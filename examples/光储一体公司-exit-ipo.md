@@ -1,19 +1,19 @@
 ---
 type: exit
-公司: "[[光储一体公司]]"
-退出类型: ipo
-退出日期: 2026-03-12
-我方累计投资: 2000
-我方退出 proceeds: 14000        # 含已 distribute 部分
-最终 MOIC: 7.0
-持有月数: 38
-IRR: 95
-退出方/买家: 科创板
-关键条款:
+company: "[[光储一体公司]]"
+exit_type: ipo
+exit_date: 2026-03-12
+total_invested: 2000
+exit_proceeds: 14000
+final_moic: 7.0
+holding_months: 38
+irr: 95
+buyer: 科创板
+key_terms:
   - 6 个月 lockup
   - 我方持有 1.2% (lockup 中)
   - 已 distribute 给 LP：30% (lockup 解除部分)
-退出复盘: ./光储一体公司-exit-retrospective.md
+retrospective_link: "[[光储一体公司-exit-retrospective]]"
 tags: [exited, exit/ipo, example]
 ---
 
@@ -58,7 +58,6 @@ tags: [exited, exit/ipo, example]
 
 - distribute 计划：分 4 次（lockup 解除后每月 25%）
 - 给 fund 整体 IRR 贡献：从 18% → 31%
-- LP 关键问题：lockup 解除后 distribute 时机 + 是否一次性卖空
 
 ## 待办
 

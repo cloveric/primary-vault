@@ -1,28 +1,25 @@
-# 复盘 Due：下次复盘截止 < today 的 portfolio 公司
-# 季度复盘的入口 —— 这些是该走过场了的
-
 filters:
   and:
     - file.inFolder("1-portfolio/companies")
     - 'note.type == "portfolio-company"'
-    - 'note.状态 == "active"'
-    - 'note.下次复盘截止 < today()'
+    - 'note.status == "active"'
+    - 'note.next_review_due < today()'
 
 formulas:
-  超期天数: '(today() - note.下次复盘截止) / 86400000'
+  overdue_days: '(today() - note.next_review_due) / 86400000'
 
 properties:
-  note.公司:
+  note.company:
     displayName: 公司
-  formula.超期天数:
+  formula.overdue_days:
     displayName: 超期 (天)
-  note.下次复盘截止:
+  note.next_review_due:
     displayName: 下次复盘
-  note["我方累计投资"]:
+  note.total_invested:
     displayName: 累计投入 (万)
-  note["follow-on 优先级"]:
+  note.follow_on_priority:
     displayName: follow-on 优先级
-  note["runway 月数"]:
+  note.runway_months:
     displayName: Runway
 
 views:
@@ -30,6 +27,6 @@ views:
     name: ⏰ 复盘 due
     limit: 50
     order:
-      - formula.超期天数
-      - note.公司
-      - note["follow-on 优先级"]
+      - formula.overdue_days
+      - note.company
+      - note.follow_on_priority

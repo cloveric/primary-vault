@@ -1,19 +1,19 @@
 ---
 type: board-prep
-公司: "[[]]"
-date:                     # 计划开会日期
-我的角色: observer
+company: "[[]]"
+date:                      # 计划开会日期
+my_role: observer
 tags: [board, prep]
 ---
 
-# <公司> · <date> 董事会准备
+# <company> · <date> 董事会准备
 
 ## 议程建议
 
-1. **财务回顾**（season 数 + memo 预测对比）
+1. **财务回顾**（季度数 + memo 预测对比）
 2. **产品 / 业务进展**
 3. **招聘 / 团队**
-4. **融资计划**（下一轮 timing + investor 偏好）
+4. **融资计划**
 5. **战略议题**
 
 ## 上次开放项 follow-up
@@ -43,8 +43,6 @@ tags: [board, prep]
 
 ## 我要 push 的事项（add value）
 
-> 我能实际帮上的事 — 不是空话
-
 - [ ]
 - [ ]
 
@@ -54,7 +52,5 @@ tags: [board, prep]
 - ⚠️
 
 ## 我之前 promise 的（自查）
-
-> 上次我答应做但还没做的，董事会前补上
 
 - [ ]

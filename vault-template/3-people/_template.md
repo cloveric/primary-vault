@@ -1,19 +1,19 @@
 ---
 type: person
-姓名:
-角色: founder         # founder / co-investor / LP / advisor / lawyer / ex-founder
-关联公司: ["[[]]"]
-首次见面:
-最近联系:
-联系频率: 月          # 周 / 月 / 季 / 年
-微信:
-邮箱:
+name:
+role: founder            # founder / co-investor / lp / advisor / lawyer / ex-founder
+related_companies: ["[[]]"]
+first_met:
+last_contact:
+contact_frequency: monthly  # weekly / monthly / quarterly / yearly
+wechat:
+email:
 linkedin:
-所在城市:
-tags: [people, founder]
+city:
+tags: [people]
 ---
 
-# <姓名>
+# <name>
 
 ## 背景一句话
 
@@ -29,7 +29,6 @@ tags: [people, founder]
 ## 互动记录
 
 - YYYY-MM-DD: [简述]
-- YYYY-MM-DD:
 
 ## 我对他的看法 / 评估
 

@@ -1,0 +1,6 @@
+# 中文 / 多字节文件名在 git 里默认显示为转义八进制
+# 强制 UTF-8 处理
+*           text=auto
+*.md        text working-tree-encoding=UTF-8
+*.base      text working-tree-encoding=UTF-8
+*.sh        text eol=lf

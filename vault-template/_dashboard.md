@@ -8,66 +8,66 @@ type: dashboard
 
 ---
 
-## 🚨 Runway 警报（< 6 月）
+## 🚨 Runway 警报（< 9 月）
 
-> 替换为你的 Bases 视图：`bases/runway-警报.base`
-> 在 Obsidian 里：右键 `bases/runway-警报.base` → "Embed in current note"
+![[bases/runway-警报]]
 
-```base
-SOURCE FROM "1-portfolio/companies"
-WHERE type == "portfolio-company" AND status == "active" AND runway-月数 < 6
-SORT BY runway-月数 ASC
-```
+> 上面是 `bases/runway-警报.base` 的嵌入。如果没渲染，点击进入查看：[[bases/runway-警报]]
 
 ---
 
 ## 😴 沉默超过 90 天
 
-> 替换为你的 Bases 视图：`bases/沉默90天.base`
+![[bases/沉默90天]]
 
-```base
-SOURCE FROM "1-portfolio/companies"
-WHERE type == "portfolio-company" AND status == "active"
-  AND最近-update < (today() - 90)
-SORT BY 最近-update ASC
-```
+---
+
+## 🏛️ 董事会 due（未来 14 天）
+
+![[bases/董事会due]]
 
 ---
 
 ## 🎯 Follow-on 候选
 
-```base
-SOURCE FROM "1-portfolio/companies"
-WHERE type == "portfolio-company" AND follow-on-优先级 == "高"
-SORT BY 下次复盘截止 ASC
-```
+![[bases/follow-on-候选]]
 
 ---
 
 ## 📥 Pipeline 漏斗
 
-```base
-SOURCE FROM "0-pipeline"
-WHERE type == "pipeline-deal"
-GROUP BY 当前阶段
-```
+![[bases/pipeline-漏斗]]
 
 ---
 
-## ⏰ 本周/本月该复盘的
+## ⏰ 复盘 due
 
-```base
-SOURCE FROM "1-portfolio/companies"
-WHERE type == "portfolio-company" AND 下次复盘截止 < (today() + 7)
-SORT BY 下次复盘截止 ASC
-```
+![[bases/复盘due]]
+
+---
+
+## 🚪 退出追踪
+
+![[bases/退出追踪]]
 
 ---
 
 ## 🗒 操作面板（手动 link）
 
 - [[_thesis|💭 我的投资策略]]
-- [[7-reviews/最新月报]] · [[7-reviews/最新季报]]
-- 周扫描：`tell claude "做周扫描"`
-- 月报：`tell claude "生成本月月报"`
-- 季度复盘：`tell claude "Q<n> 复盘"`
+- [[_QUICKSTART|🚀 第一次打开看这里]]
+- 周扫描：跟 Claude 说 `做周扫描`
+- 月报：跟 Claude 说 `生成本月月报`
+- 季度复盘：跟 Claude 说 `Q<n> 复盘`
+
+---
+
+## 📝 关于 Bases 嵌入
+
+如果上面 `![[bases/xxx]]` 嵌入没显示出表格：
+
+1. 确认 Obsidian 版本 ≥ 1.9（Bases 转正版本）
+2. 确认 `bases/` 目录下有对应的 .base 文件
+3. 也可以直接点开 `bases/runway-警报.base` 等单独打开看
+
+如果某个 .base 文件本身报错（比如 formula 不识别），见 [[bases/README|Bases 视图说明]] 里"已知未充分验证的语法"小节。

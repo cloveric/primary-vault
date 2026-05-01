@@ -1,41 +1,45 @@
 ---
 type: portfolio-company
-公司:
-行业:
-赛道:
-我方轮次:           # 种子 / 天使 / Pre-A / A / B / ...
-我方角色: 跟投       # 领投 / 跟投 / observer / SAFE
-状态: active        # active / struggling / exited-ipo / exited-ma / 写零
-首次投资日期:
-我方累计投资:        # 单位：万人民币
-我方累计占股:        # 百分比
-最新估值-投后:       # 单位：万人民币
-最近一轮日期:
-当前 MOIC: 1.0
-runway 月数:
-月烧钱:
-最近 update:
-下次复盘截止:
-首席创始人: "[[]]"
-团队规模:
-我的董事会角色: 无    # 董事 / observer / 无
-论点: "[[]]"
-project_root: /path/to/your/work/portfolio/<公司>
+company:
+industry:
+sector:
+our_round:                # seed / angel / pre-a / a / b / buyout / growth
+our_role: follow          # lead / follow / observer / safe
+status: active            # active / struggling / fundraising / exited-ipo / exited-ma / written-off
+first_investment_date:
+total_invested:           # 单位：万人民币
+ownership_pct:
+latest_post_money_valuation:
+latest_round_date:
+current_moic: 1.0
+runway_months:
+monthly_burn:
+last_update:
+next_review_due:
+primary_founder: "[[]]"
+team_size:
+my_board_role: none       # director / observer / none
+last_board_meeting:
+next_board_meeting:
+board_frequency:          # monthly / quarterly / semiannual
+current_funding_round: none  # none / started / dd / ts-negotiation / signed / ipo-prep / ma-negotiation
+thesis_link: "[[]]"
+project_root: /path/to/your/work/portfolio/<company>
 files:
-  memo: ../../4-memos/<公司>-<轮次>-memo.md
-  财务模型:
+  memo: ../../4-memos/<company>-<round>-memo.md
+  financial_model:
   pitch:
-  DD笔记:
-  合同:
-  会议纪要:
+  dd_notes:
+  contracts:
+  meetings:
 external:
   data_room:
-follow-on 优先级: 中  # 高 / 中 / 低 / 不再投
+follow_on_priority: medium   # high / medium / low / never
 last_action:
 tags: [portfolio, sector/, stage/]
 ---
 
-# <公司名>
+# <company name>
 
 ## 一句话总结
 
@@ -47,7 +51,7 @@ tags: [portfolio, sector/, stage/]
 
 ## 我们投了多少 / 怎么投的
 
-- 首次投资：日期 / 金额 / 估值 / 我方角色（领投/跟投/observer）
+- 首次投资：日期 / 金额 / 估值 / 我方角色
 - Follow-on（如有）：
 
 ## 业务
@@ -68,16 +72,24 @@ tags: [portfolio, sector/, stage/]
 
 ## Updates 时间线
 
-- [[5-updates/<公司>-2026-Q1-update]]
+- [[5-updates/<company>-<period>-update]]
 
 ## 复盘
 
-### 复盘 2026-Q2
+### 复盘 YYYY-Q?
 
 - 论点状态：
 - 关键变量进展：
 - 仓位决策：
 - 下次复盘：
+
+## 我帮过什么
+
+- YYYY-MM-DD: [对接 / 推荐 / 建议内容]
+
+## 待跟进
+
+- [ ]
 
 ## 近期操作
 

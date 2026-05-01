@@ -1,43 +1,47 @@
 ---
 type: portfolio-company
-公司: 智能制造科技
-行业: 高端制造
-赛道: 工业机器人
-我方轮次: A
-我方角色: 领投
-状态: active
-首次投资日期: 2025-06-15
-我方累计投资: 800
-我方累计占股: 3.5
-最新估值-投后: 5700
-最近一轮日期: 2025-06-15
-当前 MOIC: 1.4
-runway 月数: 11
-月烧钱: 80
-最近 update: 2026-04-15
-下次复盘截止: 2026-07-15
-首席创始人: "[[李XX]]"
-团队规模: 28
-我的董事会角色: observer
-论点: "[[智能制造科技-论点]]"
-project_root: /Users/cloveric/work/portfolio/智能制造科技
+company: 智能制造科技
+industry: 高端制造
+sector: 工业机器人
+our_round: a
+our_role: lead
+status: active
+first_investment_date: 2025-06-15
+total_invested: 800
+ownership_pct: 3.5
+latest_post_money_valuation: 5700
+latest_round_date: 2025-06-15
+current_moic: 1.4
+runway_months: 11
+monthly_burn: 80
+last_update: 2026-04-15
+next_review_due: 2026-07-15
+primary_founder: "[[李XX]]"
+team_size: 28
+my_board_role: observer
+last_board_meeting: 2026-04-10
+next_board_meeting: 2026-07-10
+board_frequency: quarterly
+current_funding_round: none
+thesis_link: "[[智能制造科技-论点]]"
+project_root: /path/to/your/work/portfolio/智能制造科技
 files:
   memo: ../../4-memos/智能制造科技-A轮-memo.md
-  财务模型: financials/Q1-2026-model.xlsx
+  financial_model: financials/Q1-2026-model.xlsx
   pitch: decks/pitch-2025-A轮.pdf
-  DD笔记: DD/
-  合同: contracts/
-  会议纪要: meetings/
+  dd_notes: DD/
+  contracts: contracts/
+  meetings: meetings/
 external:
   data_room: https://docsend.com/v/example
-follow-on 优先级: 高
+follow_on_priority: high
 last_action: 2026-05-01 14:32 解析 4 月 update，runway 从 14 月降到 11 月
 tags: [portfolio, sector/manufacturing, stage/a, lead, example]
 ---
 
 # 智能制造科技
 
-> ⚠️ 这是 primary-vault 仓库的合成数据样例，不是真实公司。
+> ⚠️ primary-vault 仓库的合成数据样例，不是真实公司。
 
 ## 一句话总结
 
@@ -47,51 +51,41 @@ tags: [portfolio, sector/manufacturing, stage/a, lead, example]
 
 - 创始人：[[李XX]] —— 前 ABB 资深工程师，10 年视觉 + 控制系统经验
 - CTO：王 XX —— 前商汤算法
-- COO：早期苹果供应商出身
 
 ## 我们投了多少 / 怎么投的
 
 - 首次：2025-06-15，A 轮领投 800 万 @ 投前 4900 万 / 投后 5700 万 = 14% 占股；后被两轮稀释到 3.5%
-- 为什么领投：见 [[智能制造科技-A轮-memo]]
 
 ## 业务
 
 - 产品：协作机器人本体 + 视觉算法 + 调试 SaaS
 - 客户：3C 代工厂（已进 2 家头部）+ 新能源电池工厂
-- 商业模式：硬件销售 70% / SaaS 30%（2026 目标 50/50）
 
 ## 关键变量监测
 
 - [x] 单产线毛利转正（2026-Q1 达成）
-- [x] 客户 NRR > 100%（2026 头部客户复购达成）
+- [x] 客户 NRR > 100%
 - [ ] 海外客户首单（目标 2026-Q3）
-- [ ] 产能扩到 200 台/月（目标 2026-Q4）
-
-## 退出条件
-
-- 论点核心假设破灭：3C 工厂 capex 持续下行 + 替代不动日系
-- IPO 路径：科创板，目标 2028
-- 早期 M&A 触发：估值到 30 亿 + 战略投资人有意愿
+- [ ] 产能扩到 200 台/月
 
 ## Updates 时间线
 
 - [[5-updates/智能制造科技-2026-Q1-update]]
 - [[5-updates/智能制造科技-2026-04-月度update]]
 
-## 复盘
+## 我帮过什么
 
-### 复盘 2026-Q2（待）
+- 2026-04-22 介绍 [[张 XX 律师]] 给创始人做 ESOP 调整
+- 2026-03-15 推荐 [[XX HR]] 帮忙找 VP Sales
 
-- 论点状态：
-- 关键变量进展：
-- 仓位决策：
-- 下次复盘：
+## 待跟进
+
+- [ ] 海外 BD 资源对接（Q3 出发）
 
 ## 近期操作
 
-- 2026-05-01 14:32 解析 4 月 update，runway 从 14 月降到 11 月（月烧增了，团队扩了 3 人）
+- 2026-05-01 14:32 解析 4 月 update，runway 从 14 月降到 11 月
 - 2026-04-22 09:15 创始人微信汇报新增大客户 POC
 - 2026-04-15 11:00 收到 4 月 update PDF
-- 2026-01-20 15:30 Q4 月度简报
-- 2025-12-08 10:00 董事会会议（observer）
+- 2026-04-10 14:00 Q2 董事会（observer 出席）
 - 2025-06-15 14:00 完成首次投资 800 万 @ 5700 万投后

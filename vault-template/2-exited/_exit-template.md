@@ -1,24 +1,24 @@
 ---
 type: exit
-公司: "[[]]"
-退出类型: ma              # ipo / ma / secondary / 写零 / 部分退出
-退出日期:
-我方累计投资:              # 单位：万
-我方退出 proceeds:          # 单位：万
-最终 MOIC:                # proceeds / 累计投资
-持有月数:
-IRR:                      # 年化（如算过）
-退出方/买家: "[[]]"
-关键条款:
+company: "[[]]"
+exit_type: ma              # ipo / ma / secondary / written-off / partial
+exit_date:
+total_invested:            # 单位：万
+exit_proceeds:             # 单位：万
+final_moic:                # proceeds / invested
+holding_months:
+irr:                       # 年化（如算过）
+buyer: "[[]]"
+key_terms:
   - cash X% / stock Y%
   - lockup N 月
   - earnout 条件
   - escrow 条件
-退出复盘: ./<公司>-exit-retrospective.md
+retrospective_link:
 tags: [exited]
 ---
 
-# <公司> · 退出记录
+# <company> · 退出记录
 
 ## 退出概况
 
@@ -65,4 +65,4 @@ tags: [exited]
 - [ ] 通知 LP
 - [ ] 处理 escrow 释放
 - [ ] tax filing
-- [ ] 退出复盘（24h-1w 内做，见 [[<公司>-exit-retrospective]]）
+- [ ] 退出复盘（24h-1w 内做）

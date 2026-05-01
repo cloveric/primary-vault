@@ -2,6 +2,62 @@
 
 All notable changes to primary-vault.
 
+## [0.4.0] — 2026-05-01 · BREAKING + 17-issue fix-up
+
+### 🚨 Breaking changes
+
+- **Frontmatter 字段名从中文带空格改成 snake_case 英文**（详见 v0.3 → v0.4 字段映射表 in `docs/CONVENTIONS.md`）。
+  - 例：`runway 月数` → `runway_months`，`当前 MOIC` → `current_moic`，`follow-on 优先级` → `follow_on_priority`
+  - 中文显示通过 Bases 的 `displayName` 实现 —— UI 上还是中文
+  - v0.3 的笔记需要批量 sed 改字段名才能用 v0.4 skill / Bases
+
+### 🔴 Critical bugs fixed
+
+- **#1**: `_dashboard.md` 之前用了**伪 Bases 语法**（SQL/DQL 风格），渲染不出来。重写为真 Bases 嵌入 (`![[bases/<name>]]`)。
+- **#2**: 创建缺失的 `vault-template/7-reviews/decisions/` 目录（带 `.gitkeep`），SKILL 反复引用但 v0.3 没建。
+- **#3**: 4 个 portfolio 样例的 `project_root` 写死了作者真实 home 路径 (`/Users/cloveric/work/...`)，全部改成 `/path/to/your/work/...`。
+- **#4**: Bases 文件用了**未充分验证**的语法。bases/README.md 加了"已知未验证"小节，列出 today() / 日期算术 / formula 在 filter 中引用 / groupBy 嵌套等存疑点 —— 用户调试时知道往哪看。
+
+### 🟡 Medium issues fixed
+
+- **#6**: SKILL.md 之前称"use Bases views"——实际 Claude 不能调 Bases。改成"读 .base 文件 YAML 当 filter 规范，Glob+Grep 复刻查询"。
+- **#7**: INSTALL.md 加 "强烈建议给 vault 也用 git" section + 命令示例。
+- **#8**: 新增 `scripts/lint-vault.sh` —— 校验 frontmatter 必填字段、type 枚举值、日期 ISO 格式、v0.3 旧字段残留、YAML 合法性。
+- **#9**: CADENCE.md "每天早上 5 分钟" 改成 "任意稳定时段" + 解释为什么早上不现实。
+- **#10**: SKILL.md 顶部加 **CRITICAL Concurrent-edit safety** section，明确指示 Claude 改笔记前先让用户在 Obsidian 关闭。INSTALL.md 也补"并发编辑警告"。
+
+### 🟢 Low priority improvements
+
+- **#11**: lint-vault.sh 提供基础"测试"——5 类检查（必填 / 第 13 节 / 日期 / v0.3 残留 / YAML）。
+- **#12**: 新增 `scripts/uninstall.sh` —— 一键拆 symlink，确认 prompt 防误操。
+- **#13**: 新增 `vault-template/_QUICKSTART.md` —— 第一次打开 vault 的 3 步 onboarding + 5 个立刻能干的事 + 5 个 FAQ。
+- **#14**: `new-deal.sh` 加 sanitize：公司名含 `/ : * ? " < > | \` 自动替换为 `-`，并提示用户。
+- **#15**: 新增 `scripts/validate-memo.sh` —— 检查 memo 第 13 节存在且实质内容 ≥ 3 行；可作为 git pre-commit hook 强制 enforcement。
+- **#16**: README + INSTALL 明确 Windows 兼容性（理论可用 Git Bash / WSL，符号链接行为不同；v1.0 会专门测试）。
+- **#17**: 新增 `.gitattributes` 强制 UTF-8 处理多字节文件名。
+
+### Added
+
+- `vault-template/_QUICKSTART.md`
+- `vault-template/7-reviews/decisions/.gitkeep`
+- `scripts/uninstall.sh`
+- `scripts/lint-vault.sh`
+- `scripts/validate-memo.sh`
+- `.gitattributes`
+
+### Changed
+
+- 所有 vault-template/ 模板：字段名 snake_case 化
+- 所有 7 个 .base 文件：字段名 snake_case 化 + properties displayName 加中文
+- 所有 5 个 examples：字段名 + project_root → placeholder
+- `_dashboard.md` 重写（真 Bases embed）
+- `vault-template/bases/README.md` 加"已知未充分验证的语法"section
+- `skills/deal-router/SKILL.md`：加并发警告 + 修 Bases wording bug + 全 schema 改 snake_case
+- `docs/CONVENTIONS.md` 大改：完整 v0.4 schema + v0.3→v0.4 映射表
+- `docs/INSTALL.md` 加 git init + 并发警告 + Windows 兼容性 + lint 用法
+- `docs/CADENCE.md` 把"早上"改成"任意稳定时段"
+- `scripts/new-deal.sh` 加 filename sanitize + 用 v0.4 字段名生成
+
 ## [0.3.0] — 2026-05-01
 
 ### Polished release · v0.2 → v0.3

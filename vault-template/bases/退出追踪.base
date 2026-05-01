@@ -1,29 +1,24 @@
-# 退出追踪：当前在退出流程中的 portfolio 公司
-# (上市辅导中 / IPO 申报中 / M&A 谈判中 / 二级转让中)
-
 filters:
   and:
     - file.inFolder("1-portfolio/companies")
     - 'note.type == "portfolio-company"'
-    - 'note.状态 == "active"'
+    - 'note.status == "active"'
     - or:
-        - 'note.当前融资轮 == "上市辅导中"'
-        - 'note.当前融资轮 == "M&A 谈判中"'
-        - 'note.当前融资轮 == "IPO 申报中"'
-        - 'note.当前融资轮 == "二级转让中"'
+        - 'note.current_funding_round == "ipo-prep"'
+        - 'note.current_funding_round == "ma-negotiation"'
 
 properties:
-  note.公司:
+  note.company:
     displayName: 公司
-  note.当前融资轮:
+  note.current_funding_round:
     displayName: 阶段
-  note["最新估值-投后"]:
+  note.latest_post_money_valuation:
     displayName: 当前估值 (万)
-  note["我方累计投资"]:
+  note.total_invested:
     displayName: 累计投入 (万)
-  note["当前 MOIC"]:
+  note.current_moic:
     displayName: 预期 MOIC
-  note.我的董事会角色:
+  note.my_board_role:
     displayName: 董事会角色
 
 views:
@@ -31,6 +26,6 @@ views:
     name: 🚪 退出追踪
     limit: 50
     order:
-      - note.公司
-      - note.当前融资轮
-      - note["当前 MOIC"]
+      - note.company
+      - note.current_funding_round
+      - note.current_moic

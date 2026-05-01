@@ -1,43 +1,43 @@
 ---
 type: portfolio-company
-公司: SaaS 公司
-行业: 企业服务
-赛道: 销售 SaaS
-我方轮次: 种子
-我方角色: 领投
-状态: struggling
-首次投资日期: 2024-03-10
-我方累计投资: 300
-我方累计占股: 8.0
-最新估值-投后: 2800
-最近一轮日期: 2024-03-10
-当前 MOIC: 1.0
-runway 月数: 4
-月烧钱: 35
-最近 update: 2026-04-25
-下次复盘截止: 2026-05-15
-首席创始人: "[[王XX]]"
-团队规模: 6
-我的董事会角色: observer
-最近董事会: 2026-04-15
-下次董事会: 2026-07-15
-董事会频率: 季
-当前融资轮: 已启动
-论点: "[[SaaS公司-论点]]"
-project_root: /Users/cloveric/work/portfolio/SaaS公司
+company: SaaS 公司
+industry: 企业服务
+sector: 销售 SaaS
+our_round: seed
+our_role: lead
+status: struggling
+first_investment_date: 2024-03-10
+total_invested: 300
+ownership_pct: 8.0
+latest_post_money_valuation: 2800
+latest_round_date: 2024-03-10
+current_moic: 1.0
+runway_months: 4
+monthly_burn: 35
+last_update: 2026-04-25
+next_review_due: 2026-05-15
+primary_founder: "[[王XX]]"
+team_size: 6
+my_board_role: observer
+last_board_meeting: 2026-04-15
+next_board_meeting: 2026-07-15
+board_frequency: quarterly
+current_funding_round: started
+thesis_link: "[[SaaS公司-论点]]"
+project_root: /path/to/your/work/portfolio/SaaS公司
 files:
   memo: ../../4-memos/SaaS公司-种子-memo.md
-  财务模型: financials/2026-04-model.xlsx
+  financial_model: financials/2026-04-model.xlsx
   pitch: decks/A轮-deck.pdf
 external: {}
-follow-on 优先级: 低
+follow_on_priority: low
 last_action: 2026-04-25 解析 4 月 update，runway 4 月，紧急
 tags: [portfolio, struggling, sector/saas, stage/seed, example]
 ---
 
 # SaaS 公司
 
-> ⚠️ primary-vault 仓库合成数据。这是个 struggling 状态样例。
+> ⚠️ primary-vault 合成数据。这是个 struggling 状态样例。
 
 ## 一句话总结
 

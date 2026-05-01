@@ -1,13 +1,13 @@
 ---
 type: memo
 deal: "[[智能制造科技]]"
-轮次: A
-推荐: 投
-推荐金额: 800
-推荐估值: 4900
+round: a
+recommendation: invest
+recommended_amount: 800
+recommended_valuation: 4900
 date: 2025-06-10
-作者: 我
-状态: 已投
+author: 我
+status: invested
 tags: [memo, stage/a, sector/manufacturing, example]
 ---
 

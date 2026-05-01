@@ -1,26 +1,24 @@
-# Follow-on 候选：高优先级 follow-on + 当前正在融下一轮
-
 filters:
   and:
     - file.inFolder("1-portfolio/companies")
     - 'note.type == "portfolio-company"'
-    - 'note.状态 == "active"'
-    - 'note["follow-on 优先级"] == "高"'
+    - 'note.status == "active"'
+    - 'note.follow_on_priority == "high"'
 
 properties:
-  note.公司:
+  note.company:
     displayName: 公司
-  note["follow-on 优先级"]:
+  note.follow_on_priority:
     displayName: 优先级
-  note.当前融资轮:
+  note.current_funding_round:
     displayName: 当前融资轮
-  note.下次复盘截止:
+  note.next_review_due:
     displayName: 下次复盘
-  note["我方累计投资"]:
+  note.total_invested:
     displayName: 累计投入 (万)
-  note["最新估值-投后"]:
+  note.latest_post_money_valuation:
     displayName: 估值 (万)
-  note["当前 MOIC"]:
+  note.current_moic:
     displayName: MOIC
 
 views:
@@ -28,9 +26,9 @@ views:
     name: 🎯 Follow-on 候选
     limit: 30
     filters:
-      'note.当前融资轮 != "无"'
+      'note.current_funding_round != "none"'
     order:
-      - note.下次复盘截止
-      - note.公司
-      - note.当前融资轮
-      - note["当前 MOIC"]
+      - note.next_review_due
+      - note.company
+      - note.current_funding_round
+      - note.current_moic
