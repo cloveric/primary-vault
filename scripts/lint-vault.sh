@@ -91,23 +91,31 @@ for old in "${OLD_FIELDS[@]}"; do
   fi
 done
 
-# 检查 5：frontmatter 不是合法 YAML
+# 检查 5：frontmatter 不是合法 YAML（可选 —— 需要 python3 + yaml 包）
 echo
-echo "📋 检查 5: frontmatter 是合法 YAML"
+echo "📋 检查 5: frontmatter 是合法 YAML（需要 python3 + pyyaml）"
+HAS_YAML=0
 if command -v python3 >/dev/null 2>&1; then
+  if python3 -c "import yaml" 2>/dev/null; then
+    HAS_YAML=1
+  fi
+fi
+
+if [ "$HAS_YAML" -eq 0 ]; then
+  echo "  ⊘ python3 / pyyaml 不可用，跳过 YAML 校验"
+  echo "  （装一下：pip3 install pyyaml）"
+else
   for f in "$VAULT_ROOT"/{1-portfolio/companies,0-pipeline/*,2-exited,4-memos,5-updates,6-board-notes,7-reviews,3-people}/*.md; do
     [ -e "$f" ] || continue
     fname=$(basename "$f")
     [ "$fname" = "_template.md" ] && continue
     [ "$fname" = ".gitkeep" ] && continue
 
-    # 提取 frontmatter（从 --- 到 --- 之间）
     python3 -c "
 import yaml, sys
 with open('$f') as fh:
     content = fh.read()
 if not content.startswith('---'):
-    print('  ⚠️  $fname 没有 frontmatter')
     sys.exit(0)
 end = content.find('---', 3)
 if end < 0:
@@ -121,8 +129,6 @@ except yaml.YAMLError as e:
     sys.exit(1)
 " || ISSUES=$((ISSUES+1))
   done
-else
-  echo "  ⊘ python3 不可用，跳过 YAML 校验"
 fi
 
 echo
