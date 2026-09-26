@@ -25,8 +25,8 @@ board_frequency: quarterly
 current_funding_round: started
 thesis_link: "[[SaaS公司-论点]]"
 project_root: /path/to/your/work/portfolio/SaaS公司
-files:
-  memo: ../../4-memos/SaaS公司-种子-memo.md
+files:                         # 相对 project_root；memo 在 vault 里，写 wikilink
+  memo: "[[SaaS公司-种子-memo]]"
   financial_model: financials/2026-04-model.xlsx
   pitch: decks/A轮-deck.pdf
 external: {}

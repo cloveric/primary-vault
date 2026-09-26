@@ -1,15 +1,16 @@
 filters:
   and:
     - file.inFolder("1-portfolio/companies")
+    - '!file.name.startsWith("_")'
     - 'note.type == "portfolio-company"'
-    - 'note.status == "active"'
+    - '["active", "struggling", "fundraising"].contains(note.status)'
     - 'note.next_review_due < today()'
 
 formulas:
-  overdue_days: '(today() - note.next_review_due) / 86400000'
+  overdue_days: '(today() - note.next_review_due).days.round()'
 
 properties:
-  note.company:
+  file.name:
     displayName: 公司
   formula.overdue_days:
     displayName: 超期 (天)
@@ -27,6 +28,12 @@ views:
     name: ⏰ 复盘 due
     limit: 50
     order:
+      - file.name
       - formula.overdue_days
-      - note.company
+      - note.next_review_due
       - note.follow_on_priority
+      - note.runway_months
+      - note.total_invested
+    sort:
+      - property: formula.overdue_days
+        direction: DESC

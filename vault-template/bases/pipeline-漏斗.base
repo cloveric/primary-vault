@@ -1,11 +1,12 @@
 filters:
   and:
     - file.inFolder("0-pipeline")
+    - '!file.name.startsWith("_")'
     - 'note.type == "pipeline-deal"'
 
 properties:
-  note.company:
-    displayName: 公司
+  file.name:
+    displayName: 项目
   note.current_stage:
     displayName: 阶段
   note.first_contact_date:
@@ -29,8 +30,12 @@ views:
       property: note.current_stage
       direction: ASC
     order:
+      - file.name
       - note.opportunity_score
-      - note.company
+      - note.risk_score
       - note.first_contact_date
       - note.recommended_amount
       - note.lead_partner
+    sort:
+      - property: note.opportunity_score
+        direction: DESC

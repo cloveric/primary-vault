@@ -2,6 +2,31 @@
 
 All notable changes to primary-vault.
 
+## [0.4.1] — 2026-09-26 · Bug-fix pass
+
+无 breaking change，v0.4 的笔记直接可用。
+
+### 🔴 Bugs fixed
+
+- **validate-memo.sh 放行没填的模板**：模板第 13 节自带 6 行占位（"- 收入到 X" 等），原来的"≥ 3 行"判定直接通过。现在跟模板原文一字不差的行、"- 标签：" 空占位都不算实质内容。
+- **validate-memo.sh 静默失败**：第 13 节全空时 `grep` 无匹配 + `pipefail` 让脚本直接 exit 1，错误提示一行都不打印。
+- **README 里的 pre-commit hook 对中文 memo 完全不生效**：`git diff --name-only` 默认把中文路径转义成 `"4-memos/\346..."`，`grep '\.md$'` 永远匹配不上。新增 `validate-memo.sh --staged`（`-z` 读路径、查暂存版本、跳过删除和模板），README 改成一行调用。
+- **Bases 天数列显示成「几秒钟」**：Obsidian 现在日期相减返回 Duration（不是毫秒数），`/ 86400000` 得到的是一个极小的时长。沉默 / 复盘超期 / 距董事会三个公式改成 `(...).days.round()`。（按 Obsidian 1.13.7 源码核对）
+- **struggling 公司被 portfolio 视图过滤掉**：6 个视图都只看 `status == "active"`，runway 4 个月的 struggling 公司不会出现在 runway 警报里。改成 `status ∈ {active, struggling, fundraising}`。
+- **lint-vault.sh 遇到没有 type 的笔记直接中途退出**（`set -e` + `pipefail` + grep 无匹配），后面的检查都不跑。
+- **lint-vault.sh YAML 检查**：文件名带 `'` 时把路径拼进 Python 源码导致语法错误；值里出现 `a---b` 时 frontmatter 被提前截断，真正的 YAML 错误漏报。
+- **new-deal.sh**：公司名含 ` #` 时 YAML 把后半截当注释；`project_root` 写成 `~/work/...`，跟"必须绝对路径"的约定矛盾；未知阶段被静默当成 `meeting`；vault 路径带空格时 `ls` 报错。
+
+### 🟡 Improvements
+
+- **新增 `skills/deal-router/scripts/portfolio-sweep.py`**：周扫描按 SKILL 的红黄绿规则确定性分级（只用标准库），SKILL.md Action 6 和 Bases 一节改为调用它 —— 原来那段示例代码块是空的。
+- **Bases**：每个视图第一列改成 `file.name`（可点击跳进笔记）；加 `sort`；排除 `_` 开头的模板；沉默天数对从没收过 update 的公司按 `first_investment_date` 算。`bases/README.md` 的"未验证语法"一节换成核对结论。
+- **lint-vault.sh**：新增 type 枚举检查（INSTALL.md 早就写了，脚本没做）、portfolio 关键枚举（status / current_funding_round / follow_on_priority / my_board_role）、`project_root` 绝对路径 / 占位符检查、pipeline `current_stage` 跟文件夹一致性、`YYYY年M月D日` 日期；所有 `_` 开头的模板统一跳过。
+- **uninstall.sh**：只删指向本仓库的 symlink；非交互（stdin 为空）时当作取消。
+- **`files.memo` 改成 wikilink**：memo 在 vault 里，原来的 `../../4-memos/...` 按"相对 project_root"解析会指错地方。
+- **文档一致性**：CONVENTIONS 修失效的 MIGRATION 链接、`our_round` / `our_role` 枚举跟模板对齐、新增 `type: exit-tracking`；SKILL 的 `retrospective_link` 改 wikilink；INSTALL 手动安装改 `ln -sfn`；所有"拷进现有 vault"改 `cp -Rn`（不覆盖已有的 README.md 等同名文件）。
+- 所有脚本在 macOS 自带的 bash 3.2 下测试通过。
+
 ## [0.4.0] — 2026-05-01 · BREAKING + 17-issue fix-up
 
 ### 🚨 Breaking changes

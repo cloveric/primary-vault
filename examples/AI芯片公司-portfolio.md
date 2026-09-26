@@ -25,8 +25,8 @@ board_frequency:
 current_funding_round: none
 thesis_link: "[[AI芯片公司-论点]]"
 project_root: /path/to/your/work/portfolio/AI芯片公司
-files:
-  memo: ../../4-memos/AI芯片公司-A轮-memo.md
+files:                         # 相对 project_root；memo 在 vault 里，写 wikilink
+  memo: "[[AI芯片公司-A轮-memo]]"
   financial_model: financials/Q1-2026-model.xlsx
   pitch: decks/pitch-2025Q3.pdf
   dd_notes: DD/

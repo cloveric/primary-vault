@@ -9,20 +9,39 @@
 #   bash new-deal.sh "AI 芯片公司" 3-DD中
 #
 # 默认 stage = 2-meeting
+# 工作目录根默认 ~/work，可用环境变量 PV_WORK_ROOT 覆盖（project_root 会写成绝对路径）
 
 set -euo pipefail
 
+STAGES="1-初筛 / 2-meeting / 3-DD中 / 4-IC / 5-pass"
+
 if [ $# -lt 1 ]; then
   echo "用法: bash new-deal.sh <公司名> [stage]"
-  echo "  stage: 1-初筛 / 2-meeting / 3-DD中 / 4-IC / 5-pass (默认 2-meeting)"
+  echo "  stage: $STAGES (默认 2-meeting)"
   exit 1
 fi
 
 COMPANY_RAW="$1"
 STAGE="${2:-2-meeting}"
 
-# Sanitize 文件名：去掉文件系统不允许的字符 / : * ? " < > | \
-COMPANY=$(echo "$COMPANY_RAW" | sed 's|[/:*?"<>|\\]|-|g')
+# Stage name → enum value
+case "$STAGE" in
+  1-初筛) STAGE_VAL=screening ;;
+  2-meeting) STAGE_VAL=meeting ;;
+  3-DD中) STAGE_VAL=dd ;;
+  4-IC) STAGE_VAL=ic ;;
+  5-pass) STAGE_VAL=pass ;;
+  *)
+    echo "❌ 未知阶段: $STAGE"
+    echo "   可选: $STAGES"
+    exit 1
+    ;;
+esac
+
+# Sanitize 文件名：
+#   / : * ? " < > | \   文件系统不允许
+#   # ^ [ ]             会弄坏 Obsidian 的 [[wikilink]]
+COMPANY=$(printf '%s' "$COMPANY_RAW" | sed 's,[][/:*?"<>|\\#^],-,g')
 
 if [ "$COMPANY" != "$COMPANY_RAW" ]; then
   echo "⚠️  公司名含特殊字符，已 sanitize: '$COMPANY_RAW' → '$COMPANY'"
@@ -45,10 +64,11 @@ fi
 
 PIPELINE_DIR="$VAULT_ROOT/0-pipeline/$STAGE"
 DEAL_FILE="$PIPELINE_DIR/$COMPANY.md"
+PROJECT_ROOT="${PV_WORK_ROOT:-$HOME/work}/pipeline/$COMPANY"
 
 if [ ! -d "$PIPELINE_DIR" ]; then
   echo "❌ 阶段目录不存在: $PIPELINE_DIR"
-  echo "   可选: $(ls $VAULT_ROOT/0-pipeline | tr '\n' ' ')"
+  echo "   现有: $(ls "$VAULT_ROOT/0-pipeline" | tr '\n' ' ')"
   exit 1
 fi
 
@@ -57,23 +77,16 @@ if [ -e "$DEAL_FILE" ]; then
   exit 0
 fi
 
+# YAML 双引号字符串转义
+yaml_str() { printf '"%s"' "$(printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g')"; }
+
 TODAY=$(date +%Y-%m-%d)
 NOW=$(date +"%Y-%m-%d %H:%M")
-
-# Stage name → enum value
-case "$STAGE" in
-  1-初筛) STAGE_VAL=screening ;;
-  2-meeting) STAGE_VAL=meeting ;;
-  3-DD中) STAGE_VAL=dd ;;
-  4-IC) STAGE_VAL=ic ;;
-  5-pass) STAGE_VAL=pass ;;
-  *) STAGE_VAL=meeting ;;
-esac
 
 cat > "$DEAL_FILE" <<EOF
 ---
 type: pipeline-deal
-company: $COMPANY
+company: $(yaml_str "$COMPANY")
 source: "[[]]"
 first_contact_date: $TODAY
 current_stage: $STAGE_VAL
@@ -83,7 +96,7 @@ expected_decision_date:
 lead_partner: 我
 risk_score:
 opportunity_score:
-project_root: ~/work/pipeline/$COMPANY
+project_root: $(yaml_str "$PROJECT_ROOT")
 files:
   pitch:
   financial_model:
@@ -117,6 +130,10 @@ EOF
 
 echo "✓ 已创建: $DEAL_FILE"
 echo
+if [ ! -d "$PROJECT_ROOT" ]; then
+  echo "工作目录还没建: mkdir -p \"$PROJECT_ROOT\""
+  echo
+fi
 echo "建议下一步："
 echo "  1. cd $VAULT_ROOT && claude"
 echo "  2. 跟 Claude 说：「$COMPANY 我刚见过创始人，主要内容是…」"

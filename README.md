@@ -9,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Obsidian](https://img.shields.io/badge/Obsidian-Bases-7c3aed)](https://obsidian.md)
 [![Skill compatible](https://img.shields.io/badge/skill-Claude%20Code%20%2B%20Codex-blueviolet)](skills/deal-router/SKILL.md)
-[![Status](https://img.shields.io/badge/status-v0.4.0-brightgreen)](CHANGELOG.md)
+[![Status](https://img.shields.io/badge/status-v0.4.1-brightgreen)](CHANGELOG.md)
 
 ---
 
@@ -164,7 +164,7 @@ Below are real "you say something → Claude does X" conversations showing how t
 **Claude**（自动按 deal-router 流程）:
 
 1. Read `vault/1-portfolio/companies/智能制造科技.md`
-2. 拿到 `project_root: ~/work/portfolio/智能制造科技`
+2. 拿到 `project_root: /Users/you/work/portfolio/智能制造科技`
 3. 打开 `updates/2026-04.pdf`，提取关键数字
 4. 创建 `vault/5-updates/智能制造科技-2026-04-update.md`，带结构化 frontmatter（runway, burn, 团队规模, 风险信号）
 5. **更新** portfolio 笔记 frontmatter：`runway_months` 14 → 11，`monthly_burn` 60 → 80，`team_size` 22 → 25
@@ -335,7 +335,8 @@ primary-vault/
 │
 ├── skills/
 │   └── deal-router/
-│       └── SKILL.md               ← 核心 skill（14 个动作，含投后 + 退出）
+│       ├── SKILL.md               ← 核心 skill（14 个动作，含投后 + 退出）
+│       └── scripts/portfolio-sweep.py  ← 周扫描：红黄绿分级（skill 自动调用）
 │
 ├── examples/                      ← 合成数据样例（克隆即可看完整一遍）
 │   ├── 智能制造科技-portfolio.md           ← active 主角
@@ -350,7 +351,7 @@ primary-vault/
     ├── uninstall.sh               ← 一键拆 symlink
     ├── new-deal.sh                ← 快速建新 deal 骨架
     ├── lint-vault.sh              ← 校验 vault 符合 v0.4 约定
-    └── validate-memo.sh           ← 强制 memo 第 13 节非空（可作 git pre-commit hook）
+    └── validate-memo.sh           ← 强制 memo 第 13 节真的填了（模板占位不算；可作 git pre-commit hook）
 ```
 
 ---
@@ -392,10 +393,10 @@ bash scripts/install.sh
 **姿势 B**：合并进现有 vault
 
 ```bash
-cp -r ~/projects/primary-vault/vault-template/. /path/to/your/existing-vault/
+cp -Rn ~/projects/primary-vault/vault-template/. /path/to/your/existing-vault/
 ```
 
-适合：你已经有 Obsidian vault 想接入。注意检查同名冲突。
+适合：你已经有 Obsidian vault 想接入。`-n` 不会覆盖你已有的同名文件。
 
 ### 4. 准备工作目录 · Prepare work directory
 
@@ -516,21 +517,19 @@ bash scripts/lint-vault.sh /path/to/your/vault
 
 ### Q10: 我能强制要求 memo 第 13 节必填吗？
 
-**A**: 能。`scripts/validate-memo.sh` 会检查 memo 文件第 13 节存在且实质内容 ≥ 3 行。把它装成 git pre-commit hook 就强制了：
+**A**: 能。`scripts/validate-memo.sh` 会检查 memo 文件第 13 节存在且实质内容 ≥ 3 行（没改过的模板占位行不算）。把它装成 git pre-commit hook 就强制了：
 
 ```bash
 # 在 vault 根目录
 mkdir -p .git/hooks
 cat > .git/hooks/pre-commit <<'EOF'
 #!/bin/bash
-for memo in $(git diff --cached --name-only | grep '4-memos/.*\.md$'); do
-  bash ~/projects/primary-vault/scripts/validate-memo.sh "$memo" || exit 1
-done
+exec bash ~/projects/primary-vault/scripts/validate-memo.sh --staged
 EOF
 chmod +x .git/hooks/pre-commit
 ```
 
-之后任何 commit 含 memo 改动都会先校验第 13 节。
+之后任何 commit 含 memo 改动都会先校验第 13 节。`--staged` 只查暂存区里新增 / 修改的 `4-memos/*.md`（校验的是暂存的版本），中文文件名、带空格的文件名都能正确处理；删除 memo、改 `_template.md` 不会被拦。
 
 ---
 
@@ -564,7 +563,7 @@ chmod +x .git/hooks/pre-commit
 - [x] **scripts/new-deal.sh** 脚手架
 - [x] **增强 _thesis.md**（10 节）
 
-### v0.4.0 · Self-audit fix-up + breaking schema refactor（**当前**）
+### v0.4.0 · Self-audit fix-up + breaking schema refactor
 
 针对 v0.3 自检发现的 17 个 bug / 设计缺陷一次性清完，并把 frontmatter 字段名重构为 snake_case 英文（breaking change）。
 
@@ -581,6 +580,15 @@ chmod +x .git/hooks/pre-commit
 - [x] `new-deal.sh` 加 filename sanitize
 - [x] INSTALL.md 加 vault `git init` 推荐 + 并发警告 + Windows 兼容性说明
 - [x] CADENCE.md "早上" → "任意稳定时段"
+
+### v0.4.1 · Bug-fix pass（**当前**）
+
+- [x] `validate-memo.sh`：没填的模板不再误判"合规"；新增 `--staged`，修掉 pre-commit hook 对中文文件名 memo 完全不生效的问题
+- [x] Bases：天数列（沉默 / 复盘超期 / 距董事会）改取 `.days`，不再显示成「几秒钟」；`struggling` 公司不再被 runway 警报等视图过滤掉；每个视图加可点击的公司列 + 排序
+- [x] `lint-vault.sh`：缺 type 不再中途退出；新增 type 枚举 / 关键枚举 / project_root / pipeline 阶段一致性检查；修文件名带引号、值里含 `---` 的漏报
+- [x] `new-deal.sh`：公司名带 `#` 不再被 YAML 截断；`project_root` 写绝对路径；未知阶段直接报错
+- [x] 新增 `skills/deal-router/scripts/portfolio-sweep.py`：周扫描红黄绿分级
+- [x] 文档：`files.memo` 改 wikilink、退出复盘路径统一、补 `exit-tracking` 类型、修失效链接、`cp -Rn` 不覆盖已有文件
 
 ### v0.5.0 · Advanced（计划）
 

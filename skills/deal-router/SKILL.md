@@ -96,8 +96,8 @@ board_frequency: quarterly    # monthly / quarterly / semiannual
 current_funding_round: none   # none / started / dd / ts-negotiation / signed / ipo-prep / ma-negotiation
 thesis_link: "[[智能制造科技-论点]]"
 project_root: /path/to/your/work/portfolio/智能制造科技
-files:
-  memo: ../../4-memos/智能制造科技-A轮-memo.md
+files:                        # 相对 project_root；memo 在 vault 里，写 wikilink
+  memo: "[[智能制造科技-A轮-memo]]"
   financial_model: financials/Q1-2026-model.xlsx
   pitch: decks/pitch-2026Q1.pdf
   dd_notes: DD/
@@ -155,7 +155,7 @@ tags: [memo, stage/a]
 ---
 type: person
 name: 李XX
-role: founder                 # founder / co-investor / lp / advisor / lawyer
+role: founder                 # founder / co-investor / lp / advisor / lawyer / ex-founder
 related_companies: ["[[智能制造科技]]"]
 first_met: 2025-05-01
 last_contact: 2026-04-20
@@ -211,7 +211,7 @@ buyer: "[[XX 上市公司]]"
 key_terms:
   - 现金 70% / 股票 30%
   - 6 个月 lockup
-retrospective_link: ./<company>-exit-retrospective.md
+retrospective_link: "[[<company>-exit-retrospective]]"   # 复盘笔记在 7-reviews/
 tags: [exited, exit/ma]
 ---
 ```
@@ -239,7 +239,7 @@ When user mentions a company name (in pipeline / portfolio / exited):
 1. **Find the note**: `Glob` on `<vault>/{0-pipeline,1-portfolio,2-exited}/**/*<name>*.md`, OR `Grep` for `company: <name>`
 2. **Read frontmatter** to get `project_root` and `files.*`
 3. **If `project_root` missing**: ask user "这个项目的工作目录在哪？"——得到答案后**写回 frontmatter**
-4. Resolve work file path: `<project_root>/<files.<key>>`
+4. Resolve work file path: `<project_root>/<files.<key>>`（`files.memo` 例外：它是 vault 内的 wikilink，直接找 `4-memos/` 里的笔记）
 5. Use `Read` / `Bash` / appropriate tool
 6. **After work**: see Action 14
 
@@ -284,11 +284,14 @@ When user forwards/pastes a founder update:
 
 #### 每周 sweep ("周扫描")
 
-1. List all `1-portfolio/companies/`
-2. **🔴 Red**: `runway_months < 6`
-3. **🟡 Yellow**: `runway_months` 6-9 OR `last_update` > 60 天 OR `next_review_due < today`
-4. **🟢 Green**: 一切正常
-5. Output table + 写到 `7-reviews/<YYYY>-W<##>-周扫描.md`
+1. Run the bundled script from the vault root (it lives in this skill's directory):
+   `python3 <skill-dir>/scripts/portfolio-sweep.py <vault-root>` —— 只用标准库，输出 markdown 表
+2. 分级规则（脚本已实现，只看 status = active / struggling / fundraising 的持有公司）：
+   - **🔴 Red**: `runway_months < 6`
+   - **🟡 Yellow**: `runway_months` 6-9 OR 沉默 > 60 天（`last_update`，没有则从 `first_investment_date` 算）OR `next_review_due < today` OR runway 没填
+   - **🟢 Green**: 一切正常
+3. 对 🔴 / 🟡 逐家补一句判断或下一步（脚本只分级，不下结论）
+4. 写到 `7-reviews/<YYYY>-W<##>-周扫描.md`
 
 #### 季度 portfolio review ("Q<n> 复盘")
 
@@ -373,7 +376,7 @@ When user says "做 X 退出复盘":
 When user says "X 公司开始上市辅导" / "X 公司有买家在谈":
 
 1. 在 portfolio note 加 `current_funding_round: ipo-prep` 或 `ma-negotiation`
-2. 创建追踪笔记 `<vault>/2-exited/_pipeline/<company>-exit-tracking.md`:
+2. 创建追踪笔记 `<vault>/2-exited/_pipeline/<company>-exit-tracking.md`（frontmatter `type: exit-tracking`, `company: "[[<company>]]"`, `started: YYYY-MM-DD`）:
    - 关键时间表 / 我方关心问题 / 我方 action items
 3. 设定提醒：每 30 天主动追踪进展
 
@@ -410,11 +413,14 @@ When user says "X 公司开始上市辅导" / "X 公司有买家在谈":
 Vault `bases/` 目录下的 `.base` 文件**不能被 Claude 直接调用**（Bases 是 Obsidian UI 渲染，不是 query API）。但你可以：
 
 - **读 .base 文件的 YAML** 当作 filter 规范——例如 `runway-警报.base` 告诉你 "runway < 9 月" 的过滤标准
-- **用 Glob + Grep + 手动过滤** 复刻 Bases 的查询逻辑：
+- **用脚本或 Glob + Grep** 复刻 Bases 的查询逻辑。runway / 沉默 / 复盘超期这几类直接用周扫描脚本：
 
 ```bash
-# 例子：复刻 runway-警报 视图
-# 列出所有 1-portfolio/companies/*.md，frontmatter runway_months < 9，按 runway 升序
+# 复刻 runway-警报 + 沉默 + 复盘 due：红黄绿分级，按 runway 升序
+python3 <skill-dir>/scripts/portfolio-sweep.py <vault-root>
+
+# 其他视图（如 follow-on 候选）用 grep 先筛再逐个读 frontmatter
+grep -l '^follow_on_priority: high' <vault-root>/1-portfolio/companies/*.md
 ```
 
 如果用户在 dashboard 看到的视图跟你给出的列表不一致，是因为 Bases 实时渲染 vs 你 Glob 时间不同，正常。

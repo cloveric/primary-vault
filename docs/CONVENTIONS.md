@@ -5,7 +5,7 @@
 >
 > **v0.4 重要变更**：frontmatter 字段名全部改成 **snake_case 英文**（v0.3 是中文带空格）。
 > 中文显示通过 Bases 的 `displayName` 实现——人看到中文，机器读到干净英文。
-> 升级见 [docs/MIGRATION-v0.3-to-v0.4.md](MIGRATION-v0.3-to-v0.4.md)。
+> 升级见本文末尾的「v0.3 → v0.4 字段名映射」表。
 
 ## 文件夹
 
@@ -39,6 +39,7 @@
 - **board meeting**：`<公司>-<YYYY-MM-DD>-board.md`，prep 同名加 `-prep`
 - **exit record**：`<公司>-exit-record.md` 在 `2-exited/`
 - **exit retrospective**：`<公司>-exit-retrospective.md` 在 `7-reviews/`
+- **exit tracking**（退出流程中）：`<公司>-exit-tracking.md` 在 `2-exited/_pipeline/`
 - **decision log**：`<YYYY-MM-DD>-<公司>-<动作>.md` 在 `7-reviews/decisions/`
 - **复盘**：
   - 周：`<YYYY>-W<##>-周扫描.md`
@@ -63,8 +64,8 @@
 | `company` | string | ✓ | 公司名（中文 / 英文都行）|
 | `industry` | string | ✓ | 行业大类 |
 | `sector` | string |   | 细分赛道 |
-| `our_round` | string | ✓ | 我们投的轮次（A / B / 种子 / Buyout / Growth）|
-| `our_role` | enum | ✓ | lead / follow / observer / SAFE |
+| `our_round` | string | ✓ | 我们投的轮次，小写：seed / angel / pre-a / a / b / c / buyout / growth …|
+| `our_role` | enum | ✓ | lead / follow / observer / safe |
 | `status` | enum | ✓ | active / struggling / fundraising / exited-ipo / exited-ma / written-off |
 | `first_investment_date` | date | ✓ | YYYY-MM-DD |
 | `total_invested` | number | ✓ | 累计投入，单位：万人民币 |
@@ -85,7 +86,7 @@
 | `current_funding_round` | enum |   | none / started / dd / ts-negotiation / signed / ipo-prep / ma-negotiation |
 | `thesis_link` | wikilink |   | 链关联的论点笔记 |
 | `project_root` | path | ✓ | **绝对路径**——工作文件目录根 |
-| `files` | object |   | key→相对路径，相对于 `project_root` |
+| `files` | object |   | key→相对路径，相对于 `project_root`（例外：`files.memo` 是 vault 内 memo 的 wikilink）|
 | `external` | object |   | key→URL（data room / Notion 等） |
 | `follow_on_priority` | enum |   | high / medium / low / never |
 
@@ -176,6 +177,13 @@
 | `original_memo_link` | ✓ | 链 memo |
 | `date` | ✓ | 复盘日期 |
 | `author` |   |  |
+
+### `type: exit-tracking`
+
+| 字段 | 必填 | 说明 |
+|---|---|---|
+| `company` | ✓ | 链 portfolio 笔记 |
+| `started` |   | 开始追踪日期（上市辅导 / 买家接触） |
 
 ### `type: review`
 

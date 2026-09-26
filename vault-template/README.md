@@ -5,10 +5,10 @@
 ## 用法 A：拷进你现有的 vault
 
 ```bash
-cp -r vault-template/. /path/to/your/obsidian/vault/
+cp -Rn vault-template/. /path/to/your/obsidian/vault/
 ```
 
-跟你现有 vault 合并。
+跟你现有 vault 合并（`-n`：已有的同名文件不覆盖）。
 
 ## 用法 B：作为独立 vault 打开
 

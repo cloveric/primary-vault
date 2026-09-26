@@ -1,18 +1,20 @@
 filters:
   and:
     - file.inFolder("1-portfolio/companies")
+    - '!file.name.startsWith("_")'
     - 'note.type == "portfolio-company"'
-    - 'note.status == "active"'
+    - '["active", "struggling", "fundraising"].contains(note.status)'
 
 formulas:
-  silent_days: '(today() - note.last_update) / 86400000'
+  # 从没收过 update 的，从首次投资日起算
+  silent_days: '(today() - if(note.last_update, note.last_update, note.first_investment_date)).days.round()'
   status_emoji: 'if(formula.silent_days > 120, "🔴 太久", if(formula.silent_days > 90, "🟡 该 ping", "✅ 正常"))'
 
 properties:
+  file.name:
+    displayName: 公司
   formula.status_emoji:
     displayName: 状态
-  note.company:
-    displayName: 公司
   formula.silent_days:
     displayName: 沉默天数
   note.last_update:
@@ -27,7 +29,11 @@ views:
     filters:
       'formula.silent_days > 90'
     order:
+      - file.name
+      - formula.status_emoji
       - formula.silent_days
-      - note.company
       - note.last_update
       - note.primary_founder
+    sort:
+      - property: formula.silent_days
+        direction: DESC

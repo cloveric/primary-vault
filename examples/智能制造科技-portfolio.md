@@ -25,8 +25,8 @@ board_frequency: quarterly
 current_funding_round: none
 thesis_link: "[[智能制造科技-论点]]"
 project_root: /path/to/your/work/portfolio/智能制造科技
-files:
-  memo: ../../4-memos/智能制造科技-A轮-memo.md
+files:                         # 相对 project_root；memo 在 vault 里，写 wikilink
+  memo: "[[智能制造科技-A轮-memo]]"
   financial_model: financials/Q1-2026-model.xlsx
   pitch: decks/pitch-2025-A轮.pdf
   dd_notes: DD/

@@ -12,12 +12,16 @@
 | 文件 | 干嘛 | 触发条件 |
 |---|---|---|
 | `runway-警报.base` | 🚨 现金紧的 portfolio | `runway_months < 9`（红 < 6, 黄 6-9）|
-| `沉默90天.base` | 😴 该 ping 创始人 | `last_update` > 90 天 |
+| `沉默90天.base` | 😴 该 ping 创始人 | `last_update` > 90 天（从没收过 update 的按 `first_investment_date` 算）|
 | `董事会due.base` | 🏛️ 即将开会 | `next_board_meeting` 在未来 14 天内 |
 | `follow-on-候选.base` | 🎯 该决定加仓的 | `follow_on_priority = high` AND `current_funding_round ≠ none` |
-| `pipeline-漏斗.base` | 📥 在看的 deal | 全 pipeline 按阶段 group |
+| `pipeline-漏斗.base` | 📥 在看的 deal | 全 pipeline 按阶段 group，按机会分排序 |
 | `复盘due.base` | ⏰ 该季度走查的 | `next_review_due < today` |
 | `退出追踪.base` | 🚪 退出流程中 | `current_funding_round ∈ {ipo-prep, ma-negotiation}` |
+
+portfolio 视图统一只看**还在持有**的公司：`status ∈ {active, struggling, fundraising}`（`struggling` 恰恰最需要盯，不能被过滤掉）。`_` 开头的模板文件一律排除。
+
+每个视图第一列是 `file.name` —— 点公司名直接跳进笔记。
 
 ## 字段名约定（v0.4 起）
 
@@ -31,14 +35,16 @@ properties:
 
 人看到的是中文，YAML 写的是干净英文。跨工具迁移、SUM/AVG 公式、Bases 引用都更顺手。
 
-## ⚠️ 已知未充分验证的语法
+## 语法说明（按 Obsidian 1.13 核对）
 
-下面这几条**基于 Obsidian 公开 Bases 文档写的，但作者未在所有 Obsidian 版本测过**：
+下面几条是照 Obsidian 1.13.7 的 Bases 实现逐条核对过语义的（没有在 GUI 里逐个视图截图验收）：
 
-- **`today()` 函数** —— 返回当前日期。最新文档明确支持。
-- **日期算术 `(today() - note.field) / 86400000`** —— 把日期当 Unix ms 算。如果你的 Obsidian 版本不支持，formula 会显示空值。
-- **`formula.<name>` 在 filters 里被引用** —— 部分版本可能要求 formula 先在 view 中 declare。
-- **`groupBy` 嵌套语法** —— `property: ... direction: ...`。
+- **日期相减返回 Duration，不是毫秒数** —— `today() - note.last_update` 得到的是一个时长对象，直接显示会变成「几秒钟」这类文字。要拿天数必须取 `.days`：`(today() - note.last_update).days.round()`。（官方文档还写着"返回毫秒"，已过时。）
+- **frontmatter 里的 `2026-04-15` 会自动识别成日期** —— 不需要额外设属性类型。
+- **空值不会误报** —— 字段没填时比较结果是空，`runway_months < 9` 这类过滤会直接把它排除。
+- **`formula.<name>` 可以在 view 的 filters 里引用**，`sort` / `groupBy` 都是 `property` + `direction` 结构。
+
+旧版本 Obsidian（日期相减还返回毫秒数的版本）上 `.days` 取不到值，天数列会是空的 —— 升级 Obsidian 即可。
 
 如果哪个 view 渲染不出来：
 
@@ -61,7 +67,8 @@ views:          # 一个 .base 可以有多个 view
   - type: table
     name: ...
     filters: ...
-    order: ...
+    order: ...    # 显示哪些列、什么顺序
+    sort: ...     # 按哪列排序
 ```
 
 直接编辑 YAML 改成你想要的过滤 / 列。

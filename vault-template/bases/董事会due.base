@@ -1,18 +1,19 @@
 filters:
   and:
     - file.inFolder("1-portfolio/companies")
+    - '!file.name.startsWith("_")'
     - 'note.type == "portfolio-company"'
-    - 'note.status == "active"'
+    - '["active", "struggling", "fundraising"].contains(note.status)'
 
 formulas:
-  days_to_meeting: '(note.next_board_meeting - today()) / 86400000'
+  days_to_meeting: '(note.next_board_meeting - today()).days.round()'
   urgency: 'if(formula.days_to_meeting < 3, "🔥 急", if(formula.days_to_meeting < 7, "⏰ 准备", "📅 预备"))'
 
 properties:
+  file.name:
+    displayName: 公司
   formula.urgency:
     displayName: 紧迫
-  note.company:
-    displayName: 公司
   note.next_board_meeting:
     displayName: 开会日期
   formula.days_to_meeting:
@@ -29,7 +30,11 @@ views:
         - 'formula.days_to_meeting >= 0'
         - 'formula.days_to_meeting <= 14'
     order:
-      - formula.days_to_meeting
-      - note.company
+      - file.name
+      - formula.urgency
       - note.next_board_meeting
+      - formula.days_to_meeting
       - note.my_board_role
+    sort:
+      - property: formula.days_to_meeting
+        direction: ASC

@@ -1,18 +1,21 @@
 filters:
   and:
     - file.inFolder("1-portfolio/companies")
+    - '!file.name.startsWith("_")'
     - 'note.type == "portfolio-company"'
-    - 'note.status == "active"'
+    - '["active", "struggling", "fundraising"].contains(note.status)'
     - 'note.runway_months < 9'
 
 formulas:
   urgency: 'if(note.runway_months < 6, "🔴 红", if(note.runway_months < 9, "🟡 黄", "🟢 绿"))'
 
 properties:
+  file.name:
+    displayName: 公司
   formula.urgency:
     displayName: 等级
-  note.company:
-    displayName: 公司
+  note.status:
+    displayName: 状态
   note.runway_months:
     displayName: Runway (月)
   note.monthly_burn:
@@ -25,8 +28,12 @@ views:
     name: 🚨 Runway 警报
     limit: 50
     order:
+      - file.name
       - formula.urgency
       - note.runway_months
-      - note.company
+      - note.status
       - note.monthly_burn
       - note.last_update
+    sort:
+      - property: note.runway_months
+        direction: ASC

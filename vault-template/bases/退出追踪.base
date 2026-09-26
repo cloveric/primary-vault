@@ -1,14 +1,15 @@
 filters:
   and:
     - file.inFolder("1-portfolio/companies")
+    - '!file.name.startsWith("_")'
     - 'note.type == "portfolio-company"'
-    - 'note.status == "active"'
+    - '["active", "struggling", "fundraising"].contains(note.status)'
     - or:
         - 'note.current_funding_round == "ipo-prep"'
         - 'note.current_funding_round == "ma-negotiation"'
 
 properties:
-  note.company:
+  file.name:
     displayName: 公司
   note.current_funding_round:
     displayName: 阶段
@@ -26,6 +27,12 @@ views:
     name: 🚪 退出追踪
     limit: 50
     order:
-      - note.company
+      - file.name
       - note.current_funding_round
       - note.current_moic
+      - note.latest_post_money_valuation
+      - note.total_invested
+      - note.my_board_role
+    sort:
+      - property: note.current_moic
+        direction: DESC

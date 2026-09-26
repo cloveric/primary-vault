@@ -1,12 +1,13 @@
 filters:
   and:
     - file.inFolder("1-portfolio/companies")
+    - '!file.name.startsWith("_")'
     - 'note.type == "portfolio-company"'
-    - 'note.status == "active"'
+    - '["active", "struggling", "fundraising"].contains(note.status)'
     - 'note.follow_on_priority == "high"'
 
 properties:
-  note.company:
+  file.name:
     displayName: 公司
   note.follow_on_priority:
     displayName: 优先级
@@ -28,7 +29,12 @@ views:
     filters:
       'note.current_funding_round != "none"'
     order:
-      - note.next_review_due
-      - note.company
+      - file.name
       - note.current_funding_round
+      - note.next_review_due
       - note.current_moic
+      - note.total_invested
+      - note.latest_post_money_valuation
+    sort:
+      - property: note.next_review_due
+        direction: ASC

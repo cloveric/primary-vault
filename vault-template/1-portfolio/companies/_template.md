@@ -25,8 +25,8 @@ board_frequency:          # monthly / quarterly / semiannual
 current_funding_round: none  # none / started / dd / ts-negotiation / signed / ipo-prep / ma-negotiation
 thesis_link: "[[]]"
 project_root: /path/to/your/work/portfolio/<company>
-files:
-  memo: ../../4-memos/<company>-<round>-memo.md
+files:                         # 相对 project_root；memo 在 vault 里，写 wikilink
+  memo: "[[<company>-<round>-memo]]"
   financial_model:
   pitch:
   dd_notes:

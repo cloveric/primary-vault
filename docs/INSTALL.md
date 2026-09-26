@@ -30,8 +30,8 @@ vault 部分**没自动装**——因为你需要决定放哪。见下面"vault 
 ### Skill
 
 ```bash
-ln -sf ~/projects/primary-vault/skills/deal-router ~/.claude/skills/deal-router
-ln -sf ~/projects/primary-vault/skills/deal-router ~/.codex/skills/deal-router
+ln -sfn ~/projects/primary-vault/skills/deal-router ~/.claude/skills/deal-router
+ln -sfn ~/projects/primary-vault/skills/deal-router ~/.codex/skills/deal-router
 ```
 
 ### Vault
@@ -45,10 +45,10 @@ ln -sf ~/projects/primary-vault/skills/deal-router ~/.codex/skills/deal-router
 #### B) 拷进现有 vault
 
 ```bash
-cp -r vault-template/. /path/to/your/existing-vault/
+cp -Rn vault-template/. /path/to/your/existing-vault/
 ```
 
-注意：会跟现有内容合并，如果你 vault 已经有同名文件夹会冲突——先备份。
+注意：会跟现有内容合并。`-n` 保证你 vault 里已有的同名文件（比如 `README.md`）不会被覆盖——但还是建议先备份 / 先 `git commit`。
 
 ### 工作目录
 
@@ -111,7 +111,7 @@ claude
 bash ~/projects/primary-vault/scripts/lint-vault.sh /path/to/your/vault
 ```
 
-会检查：必填字段、日期格式、type 枚举值、v0.3 旧字段残留、frontmatter YAML 合法性。
+会检查：type 枚举值、portfolio 必填字段和关键枚举（status / current_funding_round 等，写错了 Bases 视图会漏掉）、project_root 是不是绝对路径、pipeline 笔记的 `current_stage` 跟所在文件夹是否一致、memo 第 13 节、日期格式、v0.3 旧字段残留、frontmatter YAML 合法性。
 
 ## 升级
 

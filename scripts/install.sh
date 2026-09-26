@@ -50,8 +50,8 @@ echo "下一步：vault 设置（手动）"
 echo "  方式 A — 整个 vault-template 当独立 vault："
 echo "    在 Obsidian 里 Open vault → 选 $REPO_ROOT/vault-template/"
 echo
-echo "  方式 B — 拷进现有 vault："
-echo "    cp -r $REPO_ROOT/vault-template/. /path/to/your/vault/"
+echo "  方式 B — 拷进现有 vault（-n：已有的同名文件不覆盖）："
+echo "    cp -Rn \"$REPO_ROOT/vault-template/.\" /path/to/your/vault/"
 echo
 echo "工作目录建议结构（vault 之外）："
 echo "  mkdir -p ~/work/{portfolio,pipeline,exited}"

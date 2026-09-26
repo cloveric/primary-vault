@@ -25,8 +25,8 @@ board_frequency:
 current_funding_round: none
 thesis_link: "[[电商SaaS-论点]]"
 project_root: /path/to/your/work/portfolio/电商SaaS
-files:
-  memo: ../../4-memos/电商SaaS-种子-memo.md
+files:                         # 相对 project_root；memo 在 vault 里，写 wikilink
+  memo: "[[电商SaaS-种子-memo]]"
 external: {}
 follow_on_priority: never
 exit_date: 2026-01-15
